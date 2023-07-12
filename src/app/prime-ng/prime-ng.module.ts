@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     TableModule,
     DynamicDialogModule,
-    InputTextModule
+    InputTextModule,
+    InputNumberModule
   ]
 })
 export class PrimeNgModule { }

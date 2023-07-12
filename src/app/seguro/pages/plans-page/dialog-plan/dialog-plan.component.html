@@ -17,12 +17,13 @@
       <div class="flex flex-column gap-2">
         <label htmlFor="cuota">Cuota</label>
         <input pInputText id="cuota" aria-describedby="username-help" />
+        <p-inputNumber inputId="integeronly" formControlName="value" locale="es" [minFractionDigits]="2"></p-inputNumber>
         <!-- <small id="username-help">Enter your username to reset your password.</small> -->
       </div>
 
       <div class="flex flex-column gap-2">
         <label htmlFor="edad">Edad Maxima</label>
-        <input pInputText id="edad" aria-describedby="username-help" />
+        <p-inputNumber [showButtons]="true" inputId="edad" inputId="minmax-buttons" [min]="0" [max]="150"> </p-inputNumber>
         <!-- <small id="username-help">Enter your username to reset your password.</small> -->
       </div>
      </div>
@@ -36,5 +37,4 @@
       </div>
     </div>
   </div>
-  <p> Esta es una prueba que hace el super raynel </p>
 </div>
