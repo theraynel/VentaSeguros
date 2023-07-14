@@ -3,38 +3,30 @@
   <div class="row">
      <div class="col">
       <div class="flex flex-column gap-2">
+        <p-toast></p-toast>
         <label htmlFor="code">Codigo</label>
-        <input pInputText id="code" aria-describedby="username-help" />
-        <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+        <input type="text" pInputText id="code" [(ngModel)]="code" />
       </div>
 
       <div class="flex flex-column gap-2">
         <label htmlFor="name">Nombre</label>
-        <input pInputText id="name" aria-describedby="username-help" />
-        <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+        <input pInputText id="name" [(ngModel)]="name" aria-describedby="username-help" />
       </div>
 
       <div class="flex flex-column gap-2">
         <label htmlFor="cuota">Cuota</label>
-        <input pInputText id="cuota" aria-describedby="username-help" />
-        <p-inputNumber inputId="integeronly" formControlName="value" locale="es" [minFractionDigits]="2"></p-inputNumber>
-        <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+        <p-inputNumber inputId="integeronly" [(ngModel)]="cuota" mode="currency" currency="USD" locale="en-IN" [minFractionDigits]="2"></p-inputNumber>
       </div>
 
       <div class="flex flex-column gap-2">
-        <label htmlFor="edad">Edad Maxima</label>
-        <p-inputNumber [showButtons]="true" inputId="edad" inputId="minmax-buttons" [min]="0" [max]="150"> </p-inputNumber>
-        <!-- <small id="username-help">Enter your username to reset your password.</small> -->
+        <label htmlFor="age">Edad Maxima</label>
+        <p-inputNumber [showButtons]="true" [(ngModel)]="edad" inputId="age" inputId="minmax-buttons" [min]="0" [max]="150"> </p-inputNumber>
       </div>
      </div>
 
-     <div class="flex">
-      <div class="col-9">
-        <button label="Save" type="button" pButton icon="pi pi-save"></button>
-      </div>
-      <div class="col-3">
-        <button  type="button" pButton icon="pi pi-file-excel"></button>
-      </div>
+     <div class="flex gap-6">
+        <button label="Save" type="button" pButton icon="pi pi-save" (click)=" id != 0 ? editPlan() : addPlan()"></button>
+        <button  label="Cancel" type="button" pButton icon="pi pi-times"></button>
     </div>
   </div>
 </div>

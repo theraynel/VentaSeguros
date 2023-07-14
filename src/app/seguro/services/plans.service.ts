@@ -25,4 +25,12 @@ export class PlansService {
   addPlan(plan: Plans): Observable<Plans>{
     return this._http.post<Plans>(this.url, plan, httpOption)
   }
+
+  editPlan(id: number, plan: Plans): Observable<Plans>{
+    return this._http.put<Plans>(`${this.url}/${id}`, plan, httpOption);
+  }
+
+  deletePlan(id: number): Observable<Plans>{
+    return this._http.delete<Plans>(`${this.url}/${id}`);
+  }
 }

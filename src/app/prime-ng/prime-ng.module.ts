@@ -7,6 +7,8 @@ import { TableModule } from 'primeng/table';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TableModule,
     DynamicDialogModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    ConfirmDialogModule,
+    ToastModule
   ]
 })
 export class PrimeNgModule { }

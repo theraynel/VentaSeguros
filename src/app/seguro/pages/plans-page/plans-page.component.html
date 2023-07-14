@@ -1,5 +1,7 @@
 <div class="row p-0">
  <div class="flex">
+  <p-toast></p-toast>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
   <div class="col-10">
     <h1>Planes</h1>
   </div>
@@ -40,8 +42,8 @@
               <td>{{ planslts.edadMaxima }}</td>
               <td>{{ planslts.estado }}</td>
               <td class="flex p-1" style="font-size:10x">
-                <button type="button" pButton icon="pi pi-file-edit"></button>
-                <button type="button" pButton icon="pi pi-file-excel"></button>
+                <button type="button" (click)="openEdit(planslts)" pButton icon="pi pi-file-edit"></button>
+                <button type="button" (click)="delete(planslts)" pButton icon="pi pi-file-excel"></button>
               </td>
           </tr>
       </ng-template>

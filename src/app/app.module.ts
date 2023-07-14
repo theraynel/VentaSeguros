@@ -8,7 +8,6 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { SeguroModule } from './seguro/seguro.module';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -17,6 +16,7 @@ import { SeguroModule } from './seguro/seguro.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+
 
     SharedModule,
     SeguroModule

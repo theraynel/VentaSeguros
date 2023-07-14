@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 import { MenuComponent } from './components/menu/menu.component';
+import { DeleteComponent } from './components/delete/delete.component';
 
 
 @NgModule({
   declarations: [
-    MenuComponent
+    MenuComponent,
+    DeleteComponent
   ],
   imports: [
     CommonModule,
