@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountTypes } from '../../interfaces/accountTypes';
-import { AccountTypeService } from '../../services/account-type.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+
+import { AccountTypes } from '../../interfaces/accountTypes';
 import { DialogAccountTypesComponent } from './dialog-account-types/dialog-account-types.component';
+
+import { AccountTypeService } from '../../services/account-type.service';
 
 @Component({
   selector: 'app-account-types-page',
@@ -16,19 +18,14 @@ export class AccountTypesPageComponent implements OnInit {
 
   public accountTypes: AccountTypes[] = [];
 
+  public accountType: AccountTypes = { id: 0, codigo: '',  estado : false, nombre: '' }
+
   constructor(
     private accountServices: AccountTypeService,
     public dialogService: DialogService,
     public mess: MessageService,
     private confirmDialogService: ConfirmationService
   ){}
-
-  public accountType: AccountTypes = {
-    id: 0,
-    codigo: '',
-    estado : false,
-    nombre: ''
-   }
 
   ngOnInit(): void {
      this.getAccountType();
@@ -48,6 +45,14 @@ export class AccountTypesPageComponent implements OnInit {
 
      this.ref.onClose.subscribe((res) =>{
         this.getAccountType();
+
+        if (res !== undefined) {
+          this.mess.add({
+            severity: 'success',
+            summary: 'Tipo de Cuenta Creado',
+            detail: `Tipo de Cuenta ${res.nombre} creado con Exito!`
+          });
+        }
      })
   }
 
@@ -60,7 +65,15 @@ export class AccountTypesPageComponent implements OnInit {
 
     this.ref.onClose.subscribe((res) => {
       this.getAccountType();
-    })
+
+      if (res !== undefined) {
+        this.mess.add({
+          severity: 'success',
+          summary: 'Tipo de Cuenta Editado',
+          detail: `Tipo de Cuenta ${res.nombre} editada con Exito!`
+        });
+      }
+    });
   }
 
   delete(account: AccountTypes){
@@ -83,5 +96,4 @@ export class AccountTypesPageComponent implements OnInit {
       reject: () => {},
     });
   }
-
 }

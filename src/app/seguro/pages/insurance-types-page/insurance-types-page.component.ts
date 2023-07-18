@@ -49,6 +49,13 @@ export class InsuranceTypesPageComponent implements OnInit {
 
     this.ref.onClose.subscribe((type) => {
       this.getInsuranceType();
+      if (type !== undefined) {
+        this.mess.add({
+          severity: 'success',
+          summary: 'Tipo de Seguro Creado',
+          detail: `Tipo de Seguro ${type.nombre} creado con Exito!`,
+        });
+      }
     });
   }
 
@@ -60,6 +67,13 @@ export class InsuranceTypesPageComponent implements OnInit {
 
     this.ref.onClose.subscribe((type) => {
       this.getInsuranceType();
+      if (type !== undefined) {
+        this.mess.add({
+          severity: 'success',
+          summary: 'Tipo de Seguro Editado',
+          detail: `Tipo de Seguro ${type.nombre} editado con Exito!`,
+        });
+      }
     });
   }
 

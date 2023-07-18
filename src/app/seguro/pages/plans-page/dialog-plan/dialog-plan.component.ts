@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+ import { MessageService } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 import { Plans } from 'src/app/seguro/interfaces/plans';
@@ -9,7 +9,7 @@ import { PlansService } from 'src/app/seguro/services/plans.service';
 @Component({
   selector: 'app-dialog-plan',
   templateUrl: './dialog-plan.component.html',
-  providers: [DynamicDialogRef, MessageService],
+  providers: [ MessageService],
   styles: [],
 })
 export class DialogPlanComponent {
@@ -20,12 +20,10 @@ export class DialogPlanComponent {
   public id: number = 0;
   public estado: boolean = false;
 
-  public respuesta?: Plans;
-
   constructor(
     private planServices: PlansService,
+    public ref: DynamicDialogRef,
     private mess: MessageService,
-    private ref: DynamicDialogRef,
     private config: DynamicDialogConfig
   ) {
     this.code = this.config.data.codigo;
@@ -34,29 +32,14 @@ export class DialogPlanComponent {
     this.edad = this.config.data.edadMaxima;
     this.id = this.config.data.id;
     this.estado = this.config.data.estado;
-
-    console.log(ref);
   }
 
   addPlan() {
-    const plan: Plans = {
-      id: 0,
-      codigo: this.code,
-      nombre: this.name,
-      cuota: this.cuota,
-      edadMaxima: this.edad,
-      estado: this.estado,
-    };
+    const plan: Plans = {id: 0, codigo: this.code, nombre: this.name, cuota: this.cuota, edadMaxima: this.edad, estado: this.estado};
 
     this.planServices.addPlan(plan).subscribe((res) => {
-      console.log('response', res);
       if (res.id > 0) {
-        this.ref.close(this.respuesta);
-        this.mess.add({
-          severity: 'success',
-          summary: 'Plan Creado',
-          detail: 'Plan creado con Exito!',
-        });
+        this.ref.close(res);
       }else{
         this.mess.add({
           severity: 'error',
@@ -65,7 +48,6 @@ export class DialogPlanComponent {
         });
       }
     });
-    this.ref.close(plan);
   }
   editPlan() {
     if (this.id > 0) {
@@ -81,11 +63,6 @@ export class DialogPlanComponent {
       this.planServices.editPlan(this.id, plan).subscribe((res) => {
         if (res === null) {
           this.ref.close(plan);
-          this.mess.add({
-            severity: 'success',
-            summary: 'Plan Editado',
-            detail: 'Plan editado con Exito!',
-          });
         }else{
           this.mess.add({
             severity: 'error',
@@ -103,5 +80,7 @@ export class DialogPlanComponent {
     }
   }
 
-  close(){}
+  close(){
+    this.ref.close();
+  }
 }

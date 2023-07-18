@@ -1,13 +1,15 @@
-import { AccountTypes } from './../../../interfaces/accountTypes';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
+import { AccountTypes } from './../../../interfaces/accountTypes';
+
 import { AccountTypeService } from 'src/app/seguro/services/account-type.service';
 
 @Component({
   selector: 'app-dialog-account-types',
   templateUrl: './dialog-account-types.component.html',
-  providers: [DynamicDialogRef, MessageService],
+  providers: [MessageService],
   styles: []
 })
 export class DialogAccountTypesComponent {
@@ -37,11 +39,6 @@ export class DialogAccountTypesComponent {
     this.accountServices.addAccountType(account).subscribe((res) =>{
         if (res.id > 0) {
           this.ref.close(res);
-          this.mess.add({
-            severity: 'success',
-            summary: 'Tipo de Cuenta Creado',
-            detail: 'Tipo de Cuenta creado con Exito!',
-          });
         }else{
           this.mess.add({
             severity: 'error',
@@ -62,12 +59,7 @@ export class DialogAccountTypesComponent {
 
       this.accountServices.editAccountType(account.id, account).subscribe((resp) =>{
          if (resp === null) {
-          this.ref.close(resp);
-          this.mess.add({
-            severity: 'success',
-            summary: 'Tipo de Cuenta Editado',
-            detail: 'Tipo de Cuenta editado con Exito!',
-          });
+          this.ref.close(account);
          }else{
           this.mess.add({
             severity: 'error',
@@ -83,5 +75,9 @@ export class DialogAccountTypesComponent {
         detail: 'Debe enviar la data a Editar',
       });
      }
+  }
+
+  close(){
+    this.ref.close();
   }
 }

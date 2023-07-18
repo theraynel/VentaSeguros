@@ -15,6 +15,9 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 export class PlansPageComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
 
+  public planslts: Plans[] = [];
+  public plans2: Plans = { id: 0, codigo: '', nombre: '', edadMaxima: 0, cuota: 0, estado: false };
+
   constructor(
     private planServices: PlansService,
     public mess: MessageService,
@@ -22,24 +25,12 @@ export class PlansPageComponent implements OnInit {
     public dialogService: DialogService
   ) {}
 
-  public planslts: Plans[] = [];
-  public plans2: Plans = {
-    id: 0,
-    codigo: '',
-    nombre: '',
-    edadMaxima: 0,
-    cuota: 0,
-    estado: false,
-  };
-
   ngOnInit(): void {
     this.getPlan();
   }
 
   getPlan() {
     this.planServices.getPlans().subscribe((response: any) => {
-      console.log(response);
-
       this.planslts = response;
     });
   }
@@ -72,7 +63,16 @@ export class PlansPageComponent implements OnInit {
     });
 
     this.ref.onClose.subscribe((plan) => {
-        this.getPlan();
+      this.getPlan();
+
+      console.log(plan);
+      if (plan !== undefined) {
+        this.mess.add({
+          severity: 'success',
+          summary: 'Plan Creado',
+          detail: `Plan ${ plan.nombre } creado con Exito!`
+        });
+      }
     });
   }
 
@@ -85,6 +85,14 @@ export class PlansPageComponent implements OnInit {
     this.ref.onClose.subscribe((plan) => {
       this.getPlan();
 
+      console.log(plan);
+      if (plan !== undefined) {
+        this.mess.add({
+          severity: 'success',
+          summary: 'Plan Editado',
+          detail: `Plan ${ plan.nombre } editado con Exito!`
+        });
+      }
     });
   }
 

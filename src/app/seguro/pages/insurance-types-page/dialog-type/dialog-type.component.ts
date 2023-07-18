@@ -7,7 +7,7 @@ import { InsuranceTypeService } from 'src/app/seguro/services/insurance-type.ser
 @Component({
   selector: 'app-dialog-type',
   templateUrl: './dialog-type.component.html',
-  providers: [DynamicDialogRef, MessageService],
+  providers: [MessageService],
   styles: []
 })
 export class DialogTypeComponent {
@@ -16,8 +16,6 @@ export class DialogTypeComponent {
   public code: string = "";
   public estado:boolean = false;
   public id: number = 0;
-
-  public respose? : InsuranceTypes;
 
   constructor(
     private typeServices: InsuranceTypeService,
@@ -38,11 +36,6 @@ export class DialogTypeComponent {
      this.typeServices.addInsuranceType(type).subscribe( (res) => {
       if(res.id > 0 ){
         this.ref.close(res);
-        this.mess.add({
-          severity: 'success',
-          summary: 'Tipo de Seguro Creado',
-          detail: 'Tipo de Seguro creado con Exito!',
-        });
       }
       else{
         this.mess.add({
@@ -66,11 +59,6 @@ export class DialogTypeComponent {
       this.typeServices.editInsuranceType(this.id, type).subscribe((res) => {
         if (res === null) {
           this.ref.close(type);
-          this.mess.add({
-            severity: 'success',
-            summary: 'Tipo de Seguro Editado',
-            detail: 'Tipo de Seguro editado con Exito!',
-          });
         }else{
           this.mess.add({
             severity: 'error',

@@ -20,7 +20,7 @@
 
       <div class="flex gap-6">
         <button label="Save" type="button" pButton icon="pi pi-save" (click)="id != 0 ? editAccountType() : addAccountType()"></button>
-        <button label="Cancel" type="button" pButton icon="pi pi-times" ></button>
+        <button label="Cancel" type="button" pButton icon="pi pi-times" (click)="close()" ></button>
       </div>
     </div>
   </div>
