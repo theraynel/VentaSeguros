@@ -1,7 +1,7 @@
 
 <div class="card">
   <div class="row">
-     <div class="col">
+     <div class="col ">
       <div class="flex flex-column gap-2">
         <p-toast></p-toast>
         <label htmlFor="code">Codigo</label>
@@ -15,10 +15,10 @@
 
       <div class="flex flex-column gap-2">
         <label htmlFor="cuota">Cuota</label>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="cuota" mode="currency" currency="USD" locale="en-IN" [minFractionDigits]="2"></p-inputNumber>
+        <p-inputNumber styleClass="w-full" inputId="integeronly" [(ngModel)]="cuota" mode="currency" currency="USD" locale="en-IN" [minFractionDigits]="2"></p-inputNumber>
       </div>
 
-      <div class="flex flex-column gap-2">
+      <div class="flex flex-column gap-2 flex-auto">
         <label htmlFor="age">Edad Maxima</label>
         <p-inputNumber [showButtons]="true" [(ngModel)]="edad" inputId="age" inputId="minmax-buttons" [min]="0" [max]="150"> </p-inputNumber>
       </div>
@@ -26,7 +26,7 @@
 
      <div class="flex gap-6">
         <button label="Save" type="button" pButton icon="pi pi-save" (click)=" id != 0 ? editPlan() : addPlan()"></button>
-        <button  label="Cancel" type="button" pButton icon="pi pi-times"></button>
+        <button  label="Cancel" type="button" pButton icon="pi pi-times" (click)="close()"></button>
     </div>
   </div>
 </div>

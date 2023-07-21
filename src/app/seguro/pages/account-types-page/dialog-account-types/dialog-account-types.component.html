@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="row">
+    <div class="col">
+      <p-toast></p-toast>
+      <div class="flex flex-column gap-2">
+        <label htmlFor="code">Codigo</label>
+        <input type="text" pInputText id="code" [(ngModel)]="code" />
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <label htmlFor="name">Nombre</label>
+        <input pInputText
+          id="name"
+          [(ngModel)]="name"
+          aria-describedby="username-help"
+        />
+      </div>
+
+      <br>
+
+      <div class="flex gap-6">
+        <button label="Save" type="button" pButton icon="pi pi-save" (click)="id != 0 ? editAccountType() : addAccountType()"></button>
+        <button label="Cancel" type="button" pButton icon="pi pi-times" (click)="close()" ></button>
+      </div>
+    </div>
+  </div>
+</div>
