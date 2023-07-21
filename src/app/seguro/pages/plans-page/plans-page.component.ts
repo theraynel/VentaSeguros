@@ -15,12 +15,12 @@ import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/a
 })
 export class PlansPageComponent implements OnInit {
 
-  ref: DynamicDialogRef | undefined;
+ public ref: DynamicDialogRef | undefined;
 
   constructor(
     private planServices: PlansService,
     public mess: MessageService,
-    private confirmationService: ConfirmationService,
+    public confirmationService: ConfirmationService,
     public dialogService: DialogService
     ){}
 
@@ -28,7 +28,7 @@ export class PlansPageComponent implements OnInit {
   public plans2 : Plans = { id:0, codigo: "", nombre:"",edadMaxima:0, cuota:0, estado:false};
 
   ngOnInit(): void {
-     this.getPlan();
+    //  this.getPlan();
   }
 
   getPlan(){
@@ -62,22 +62,30 @@ export class PlansPageComponent implements OnInit {
         data: this.plans2,
     });
 
-    this.ref.onClose.subscribe((plan: Plans) =>{
-      this.getPlan();
+    console.log(this.ref);
+
+
+
+    this.ref.onClose.subscribe(() =>{
+      console.log("Prueba de entrada");
+
+      // this.getPlan();
       // this.mess.add({ severity: 'success', summary: 'Plan Creado', detail: "Plan creado con Exito!" });
     })
   };
 
   openEdit(plan: Plans){
+
     this.ref = this.dialogService.open(DialogPlanComponent, {
       header: 'Editar Plan',
       data: plan
-  });
+    });
 
-    this.ref.onClose.subscribe((plan: Plans)  => {
+    this.ref.onClose.subscribe(()  => {
       this.getPlan();
-   });
- };
+    });
+
+  };
 
  ngOnDestroy() {
   if (this.ref) {
