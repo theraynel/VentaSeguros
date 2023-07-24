@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
  import { MessageService } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
@@ -20,11 +21,19 @@ export class DialogPlanComponent {
   public id: number = 0;
   public estado: boolean = false;
 
+  planForm = this.fb.group({
+    codePlan: ['', Validators.required],
+    namePlan: ['', Validators.required],
+    cuotaPlan: ['', Validators.required],
+    edadPlan: [null, Validators.min(1)]
+  });
+
   constructor(
     private planServices: PlansService,
     public ref: DynamicDialogRef,
     private mess: MessageService,
-    private config: DynamicDialogConfig
+    private config: DynamicDialogConfig,
+    private fb: FormBuilder
   ) {
     this.code = this.config.data.codigo;
     this.name = this.config.data.nombre;
@@ -35,7 +44,11 @@ export class DialogPlanComponent {
   }
 
   addPlan() {
-    const plan: Plans = {id: 0, codigo: this.code, nombre: this.name, cuota: this.cuota, edadMaxima: this.edad, estado: this.estado};
+
+    console.log("Cuota",this.cuota);
+
+
+    const plan: Plans = {id: 0, codigo: this.code, nombre: this.name, cuota: this.cuota, edadMaxima: this.edad, estado: true};
 
     this.planServices.addPlan(plan).subscribe((res) => {
       if (res.id > 0) {

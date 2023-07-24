@@ -5,6 +5,7 @@ import { InsuranceTypeService } from '../../services/insurance-type.service';
 
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { segurosCommon } from 'src/app/shared/common/common';
 
 @Component({
   selector: 'app-insurance-types-page',
@@ -23,6 +24,9 @@ export class InsuranceTypesPageComponent implements OnInit {
     nombre: '',
     estado: false,
   };
+
+ public common = new segurosCommon;
+
 
   constructor(
     private typeServices: InsuranceTypeService,

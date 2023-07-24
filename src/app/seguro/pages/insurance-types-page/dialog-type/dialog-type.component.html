@@ -1,28 +1,69 @@
-<div class="card">
-  <div class="row">
-    <div class="col">
-      <p-toast></p-toast>
-      <div class="flex flex-column gap-2">
-        <label htmlFor="code">Codigo</label>
-        <input type="text" pInputText id="code" [(ngModel)]="code" />
-      </div>
+<form [formGroup]="typeForm"  (ngSubmit)="id != 0 ? editInsuranceType() : addInsuranceType()"
+>
+  <div class="card">
+    <div class="row">
+      <div class="col">
+        <p-toast></p-toast>
+        <div class="flex flex-column gap-2">
+          <label htmlFor="code">Codigo</label>
+          <input
+            type="text"
+            pInputText
+            id="code"
+            [(ngModel)]="code"
+            formControlName="codeType"
+            placeholder="Codigo"
+          />
 
-      <div class="flex flex-column gap-2">
-        <label htmlFor="name">Nombre</label>
-        <input pInputText
-          id="name"
-          [(ngModel)]="name"
-          aria-describedby="username-help"
-          required="true"
-        />
-      </div>
+          <small
+            class="p-error block"
+            *ngIf="
+              typeForm.get('codeType')?.invalid &&
+              typeForm.get('codeType')?.dirty
+            "
+            >El codigo es requerido</small
+          >
+        </div>
 
-      <br>
+        <div class="flex flex-column gap-2">
+          <label htmlFor="name">Nombre</label>
+          <input
+            pInputText
+            id="name"
+            [(ngModel)]="name"
+            formControlName="nameType"
+            placeholder="Nombre"
+          />
 
-      <div class="flex gap-6">
-        <button label="Save" type="button" pButton icon="pi pi-save" (click)="id != 0 ? editInsuranceType() : addInsuranceType()"></button>
-        <button label="Cancel" type="button" pButton icon="pi pi-times" ></button>
+          <small
+            class="p-error block"
+            *ngIf="
+              typeForm.get('nameType')?.invalid &&
+              typeForm.get('nameType')?.dirty
+            "
+            >El nombre es requerido</small
+          >
+        </div>
+
+        <br />
+
+        <div class="flex gap-6">
+          <button
+            label="Save"
+            type="submit"
+            pButton
+            icon="pi pi-save"
+            [disabled]="typeForm.invalid"
+          ></button>
+          <button
+            label="Cancel"
+            type="button"
+            pButton
+            icon="pi pi-times"
+            (click)="close()"
+          ></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

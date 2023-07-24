@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { InsuranceTypes } from 'src/app/seguro/interfaces/insuranceTypes';
 import { InsuranceTypeService } from 'src/app/seguro/services/insurance-type.service';
 
@@ -17,11 +20,17 @@ export class DialogTypeComponent {
   public estado:boolean = false;
   public id: number = 0;
 
+  typeForm = this.fb.group({
+    nameType: ['', Validators.required],
+    codeType: ['', Validators.required]
+  });
+
   constructor(
     private typeServices: InsuranceTypeService,
     private mess: MessageService,
     private ref: DynamicDialogRef,
-    private config: DynamicDialogConfig
+    private config: DynamicDialogConfig,
+    private fb: FormBuilder
   ){
     this.name = this.config.data.nombre;
     this.code = this.config.data.codigo;
@@ -75,5 +84,9 @@ export class DialogTypeComponent {
         detail: 'Debe enviar la data a Editar',
       });
      }
+  }
+
+  close(){
+    this.ref.close();
   }
 }

@@ -9,6 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TagModule } from 'primeng/tag';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     InputNumberModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    ReactiveFormsModule,
+    ToolbarModule,
+    TagModule
   ]
 })
 export class PrimeNgModule { }
