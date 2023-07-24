@@ -5,6 +5,7 @@ import { Plans } from '../../interfaces/plans';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogPlanComponent } from './dialog-plan/dialog-plan.component';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { segurosCommon } from 'src/app/shared/common/common';
 
 @Component({
   selector: 'app-plans-page',
@@ -17,6 +18,8 @@ export class PlansPageComponent implements OnInit {
 
   public planslts: Plans[] = [];
   public plans2: Plans = { id: 0, codigo: '', nombre: '', edadMaxima: 0, cuota: 0, estado: false };
+
+  public common = new segurosCommon;
 
   constructor(
     private planServices: PlansService,

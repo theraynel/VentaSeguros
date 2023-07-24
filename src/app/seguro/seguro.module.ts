@@ -13,6 +13,7 @@ import { InsuranceSaleComponent } from './pages/consult-sales-page/insurance-sal
 import { DialogPlanComponent } from './pages/plans-page/dialog-plan/dialog-plan.component';
 import { DialogTypeComponent } from './pages/insurance-types-page/dialog-type/dialog-type.component';
 import { DialogAccountTypesComponent } from './pages/account-types-page/dialog-account-types/dialog-account-types.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DialogAccountTypesComponent } from './pages/account-types-page/dialog-a
     DialogPlanComponent,
     DialogTypeComponent,
     DialogAccountTypesComponent,
+    DashboardComponent,
   ],
   imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule],
 })

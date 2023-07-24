@@ -1,32 +1,107 @@
+<form [formGroup]="planForm" (ngSubmit)="id != 0 ? editPlan() : addPlan()">
+  <div class="card">
+    <div class="row">
+      <div class="col">
+        <div class="flex flex-column gap-2">
+          <p-toast></p-toast>
+          <label htmlFor="code">Codigo</label>
+          <input
+            type="text"
+            pInputText
+            id="code"
+            [(ngModel)]="code"
+            formControlName="codePlan"
+            placeholder="Codigo"
+          />
 
-<div class="card">
-  <div class="row">
-     <div class="col ">
-      <div class="flex flex-column gap-2">
-        <p-toast></p-toast>
-        <label htmlFor="code">Codigo</label>
-        <input type="text" pInputText id="code" [(ngModel)]="code" />
+          <small
+            class="p-error block"
+            *ngIf="
+              planForm.get('codePlan')?.invalid &&
+              planForm.get('codePlan')?.dirty
+            "
+            >El codigo es requerida</small>
+        </div>
+
+        <div class="flex flex-column gap-2">
+          <label htmlFor="name">Nombre</label>
+          <input
+            type="text"
+            pInputText
+            id="name"
+            [(ngModel)]="name"
+            formControlName="namePlan"
+            placeholder="Nombre"
+          />
+
+          <small
+            class="p-error block"
+            *ngIf="
+              planForm.get('namePlan')?.invalid &&
+              planForm.get('namePlan')?.dirty
+            "
+            >El nombre es requerida</small>
+        </div>
+
+        <div class="flex flex-column gap-2">
+          <label htmlFor="cuota">Cuota</label>
+          <p-inputNumber
+            styleClass="w-full"
+            inputId="integeronly"
+            [(ngModel)]="cuota"
+            mode="currency"
+            [min]="1"
+            currency="USD"
+            locale="en-IN"
+            [minFractionDigits]="2"
+            formControlName="cuotaPlan"
+            placeholder="Cuota"
+          ></p-inputNumber>
+
+          <small
+            class="p-error block"
+            *ngIf="
+              (planForm.get('cuotaPlan')?.invalid &&
+                planForm.get('cuotaPlan')?.dirty) ||
+              cuota < 0
+            "
+            >La cuota es requerida</small
+          >
+        </div>
+
+        <div class="flex flex-column gap-2 flex-auto">
+          <label htmlFor="age">Edad Maxima</label>
+          <p-inputNumber
+            [showButtons]="true"
+            [(ngModel)]="edad"
+            inputId="age"
+            inputId="minmax-buttons"
+            [min]="0"
+            [max]="150"
+            formControlName="edadPlan"
+          >
+          </p-inputNumber>
+
+          <small
+          class="p-error block"
+          *ngIf="
+            planForm.get('edadPlan')?.invalid &&
+            planForm.get('edadPlan')?.dirty
+          "
+          >El codigo es requerida</small>
+        </div>
       </div>
 
-      <div class="flex flex-column gap-2">
-        <label htmlFor="name">Nombre</label>
-        <input pInputText id="name" [(ngModel)]="name" aria-describedby="username-help" />
+      <div class="flex gap-6">
+        <button label="Save" type="submit" pButton icon="pi pi-save"  [disabled]="planForm.invalid"></button>
+        <button
+          label="Cancel"
+          type="button"
+          pButton
+          icon="pi pi-times"
+          (click)="close()"
+        ></button>
       </div>
-
-      <div class="flex flex-column gap-2">
-        <label htmlFor="cuota">Cuota</label>
-        <p-inputNumber styleClass="w-full" inputId="integeronly" [(ngModel)]="cuota" mode="currency" currency="USD" locale="en-IN" [minFractionDigits]="2"></p-inputNumber>
-      </div>
-
-      <div class="flex flex-column gap-2 flex-auto">
-        <label htmlFor="age">Edad Maxima</label>
-        <p-inputNumber [showButtons]="true" [(ngModel)]="edad" inputId="age" inputId="minmax-buttons" [min]="0" [max]="150"> </p-inputNumber>
-      </div>
-     </div>
-
-     <div class="flex gap-6">
-        <button label="Save" type="button" pButton icon="pi pi-save" (click)=" id != 0 ? editPlan() : addPlan()"></button>
-        <button  label="Cancel" type="button" pButton icon="pi pi-times" (click)="close()"></button>
     </div>
   </div>
-</div>
+</form>

@@ -6,6 +6,7 @@ import { AccountTypes } from '../../interfaces/accountTypes';
 import { DialogAccountTypesComponent } from './dialog-account-types/dialog-account-types.component';
 
 import { AccountTypeService } from '../../services/account-type.service';
+import { segurosCommon } from 'src/app/shared/common/common';
 
 @Component({
   selector: 'app-account-types-page',
@@ -19,6 +20,8 @@ export class AccountTypesPageComponent implements OnInit {
   public accountTypes: AccountTypes[] = [];
 
   public accountType: AccountTypes = { id: 0, codigo: '',  estado : false, nombre: '' }
+
+  public common = new segurosCommon;
 
   constructor(
     private accountServices: AccountTypeService,

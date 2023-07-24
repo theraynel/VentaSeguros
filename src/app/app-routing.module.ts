@@ -6,10 +6,15 @@ import { AccountTypesPageComponent } from './seguro/pages/account-types-page/acc
 import { ConsultSalesPageComponent } from './seguro/pages/consult-sales-page/consult-sales-page.component';
 import { InsuranceTypesPageComponent } from './seguro/pages/insurance-types-page/insurance-types-page.component';
 import { PlansPageComponent } from './seguro/pages/plans-page/plans-page.component';
+import { DashboardComponent } from './seguro/pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: DashboardComponent
+  },
+  {
+    path: 'consultSale',
     component: ConsultSalesPageComponent
   },
   {

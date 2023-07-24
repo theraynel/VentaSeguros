@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormBuilder, Validator, Validators } from '@angular/forms';
 
 import { AccountTypes } from './../../../interfaces/accountTypes';
 
 import { AccountTypeService } from 'src/app/seguro/services/account-type.service';
+
 
 @Component({
   selector: 'app-dialog-account-types',
@@ -21,11 +23,17 @@ export class DialogAccountTypesComponent {
 
   public respose? : AccountTypes;
 
+  accountForm = this.fb.group({
+    nameGroup : ['', Validators.required],
+    codeGroup : ['',Validators.required]
+  });
+
   constructor(
     private accountServices: AccountTypeService,
     public ref: DynamicDialogRef,
     public mess:MessageService,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private fb: FormBuilder
   ){
     this.name = config.data.nombre;
     this.code = this.config.data.codigo;

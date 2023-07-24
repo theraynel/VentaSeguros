@@ -1,27 +1,63 @@
-<div class="card">
-  <div class="row">
-    <div class="col">
-      <p-toast></p-toast>
-      <div class="flex flex-column gap-2">
-        <label htmlFor="code">Codigo</label>
-        <input type="text" pInputText id="code" [(ngModel)]="code" />
-      </div>
+<form
+  action=""
+  [formGroup]="accountForm"
+  (ngSubmit)="id != 0 ? editAccountType() : addAccountType()"
+>
+  <div class="card">
+    <div class="row">
+      <div class="col">
+        <p-toast></p-toast>
+        <div class="flex flex-column gap-2">
+          <label htmlFor="code">Codigo</label>
+          <input
+            type="text"
+            pInputText
+            id="code"
+            [(ngModel)]="code"
+            formControlName="codeGroup"
+            placeholder="Codigo"
+          />
 
-      <div class="flex flex-column gap-2">
-        <label htmlFor="name">Nombre</label>
-        <input pInputText
-          id="name"
-          [(ngModel)]="name"
-          aria-describedby="username-help"
-        />
-      </div>
+          <small
+            class="p-error block"
+            *ngIf="
+              accountForm.get('codeGroup')?.invalid &&
+              accountForm.get('codeGroup')?.dirty
+            "
+            >El codigo es requerido</small>
+        </div>
 
-      <br>
+        <div class="flex flex-column gap-2">
+          <label htmlFor="name">Nombre</label>
+          <input
+            pInputText
+            id="name"
+            [(ngModel)]="name"
+            formControlName="nameGroup"
+            placeholder="Nombre"
+          />
 
-      <div class="flex gap-6">
-        <button label="Save" type="button" pButton icon="pi pi-save" (click)="id != 0 ? editAccountType() : addAccountType()"></button>
-        <button label="Cancel" type="button" pButton icon="pi pi-times" (click)="close()" ></button>
+          <small class="p-error block"
+          *ngIf="
+            accountForm.get('nameGroup')?.invalid &&
+            accountForm.get('nameGroup')?.dirty
+          "
+          >El nombre es requerido</small>
+        </div>
+
+        <br />
+
+        <div class="flex gap-6">
+          <button label="Save" type="submit" pButton icon="pi pi-save" [disabled]="accountForm.invalid"></button>
+          <button
+            label="Cancel"
+            type="button"
+            pButton
+            icon="pi pi-times"
+            (click)="close()"
+          ></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>
