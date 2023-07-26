@@ -100,6 +100,21 @@ export class InsuranceTypesPageComponent implements OnInit {
        },
        reject: () =>{},
    });
+  }
 
+  updateStatus(type: InsuranceTypes){
+    if (type.estado == true) type.estado = false;
+    else type.estado = true;
+
+    console.log(type);
+
+
+    this.typeServices
+      .editInsuranceType(type.id, type)
+      .subscribe((res) => {
+        if (res === null) {
+          this.getInsuranceType();
+        }
+      });
   }
 }

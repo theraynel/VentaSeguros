@@ -99,6 +99,19 @@ export class PlansPageComponent implements OnInit {
     });
   }
 
+  updateStatus(plan: Plans){
+    if (plan.estado == true) plan.estado = false;
+    else plan.estado = true;
+
+    this.planServices
+      .editPlan(plan.id, plan)
+      .subscribe((res) => {
+        if (res === null) {
+          this.getPlan();
+        }
+      });
+  }
+
   ngOnDestroy() {
     if (this.ref) {
       this.ref.close();

@@ -1,11 +1,17 @@
 <div class="card">
-
   <p-toast></p-toast>
-  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
 
   <p-toolbar styleClass="mb-4 flex justify-content-end">
     <ng-template pTemplate="right">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-primary mr-2" (click)="show()"></button>
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-primary mr-2"
+        (click)="show()"
+      ></button>
     </ng-template>
   </p-toolbar>
 
@@ -53,7 +59,7 @@
             Edad Maxima <p-sortIcon field="edadMaxima" />
           </th>
           <th pSortableColumn="estado">Estado <p-sortIcon field="estado" /></th>
-          <th style="width: 4em"> Opciones</th>
+          <th style="width: 4em">Opciones</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-planslts>
@@ -63,10 +69,11 @@
           <td>{{ planslts.cuota | currency }}</td>
           <td>{{ planslts.edadMaxima }}</td>
           <td>
-            <p-tag
-              [value]="common.getStatus(planslts.estado)"
-              [severity]="common.getSeverity(planslts.estado)"
-            ></p-tag>
+            <p-button
+              [label]="common.getStatus(planslts.estado)"
+              (onClick)="updateStatus(planslts)"
+              [styleClass]="common.getSeverity(planslts.estado)"
+            ></p-button>
           </td>
           <td class="flex p-1" style="font-size: 10x">
             <button
@@ -90,7 +97,6 @@
       </ng-template>
     </p-table>
   </div>
-
 </div>
 
 <!-- <div class="row p-0">

@@ -1,34 +1,60 @@
 <div class="card p-0">
-
   <p-toast></p-toast>
-  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
 
   <p-toolbar styleClass="mb-4 flex justify-content-end">
     <ng-template pTemplate="right">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-primary mr-2" (click)="show()"></button>
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-primary mr-2"
+        (click)="show()"
+      ></button>
     </ng-template>
   </p-toolbar>
 
-  <p-table #dt1 [paginator]="true" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [value]="types"
-    [rowHover]="true" [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]"
-    [globalFilterFields]="['nombre', 'codigo', 'cuota', 'edadMaxima', 'estado']">
+  <p-table
+    #dt1
+    [paginator]="true"
+    dataKey="id"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [value]="types"
+    [rowHover]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['nombre', 'codigo', 'cuota', 'edadMaxima', 'estado']"
+  >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         <h2 class="m-0">Tipo de Seguros</h2>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-            placeholder="Search..." style="width:auto" />
+          <input
+            pInputText
+            type="text"
+            (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Search..."
+            style="width: auto"
+          />
         </span>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="codigo">Codigo <p-sortIcon field="codigo"></p-sortIcon></th>
-        <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
-        <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
-        <th style="width:4em">Opciones</th>
+        <th pSortableColumn="codigo">
+          Codigo <p-sortIcon field="codigo"></p-sortIcon>
+        </th>
+        <th pSortableColumn="nombre">
+          Nombre <p-sortIcon field="nombre"></p-sortIcon>
+        </th>
+        <th pSortableColumn="estado">
+          Estado <p-sortIcon field="estado"></p-sortIcon>
+        </th>
+        <th style="width: 4em">Opciones</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-types>
@@ -36,12 +62,28 @@
         <td>{{ types.codigo }}</td>
         <td>{{ types.nombre }}</td>
         <td>
-          <p-tag [value]="common.getStatus(types.estado)" [severity]="common.getSeverity(types.estado)"></p-tag>
+            <p-button
+              [label]="common.getStatus(types.estado)"
+              (onClick)="updateStatus(types)"
+              [styleClass]="common.getSeverity(types.estado)"
+            ></p-button>
         </td>
-        <td class="flex p-1" style="font-size:10x">
-          <button type="button" (click)="openEdit(types)" pButton pRipple icon="pi pi-pencil"
-            class="p-button-rounded mr-1"></button>
-          <button type="button" (click)="delete(types)" pButton icon="pi pi-trash" class="p-button-rounded "></button>
+        <td class="flex p-1" style="font-size: 10x">
+          <button
+            type="button"
+            (click)="openEdit(types)"
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded mr-1"
+          ></button>
+          <button
+            type="button"
+            (click)="delete(types)"
+            pButton
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+          ></button>
         </td>
       </tr>
     </ng-template>

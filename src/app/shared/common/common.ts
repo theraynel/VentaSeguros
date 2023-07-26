@@ -4,24 +4,14 @@ export class segurosCommon {
   }
 
   getStatus(status: boolean): string {
-    switch (status) {
-      case true:
-           return 'Activo'
-      case false:
-           return 'Inactivo'
-      default:
-        return 'Inactivo';
-    }
+    return status === true ? 'Activo' : 'Inactivo';
   }
 
   getSeverity(status: boolean) {
-    switch (status) {
-        case true:
-            return 'success';
-        case false:
-            return 'danger';
-        default:
-           return 'danger'
-    }
+    return status === true ? 'p-button-primary p-button-text' : 'p-button-danger p-button-text';
+  }
+
+  getSexo(sex: string){
+    return sex === 'M'? 'Masculino' : 'Femenino'
   }
 }
