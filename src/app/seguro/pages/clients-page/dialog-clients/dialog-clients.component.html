@@ -3,7 +3,7 @@
     <p-toast></p-toast>
     <div class="row">
       <div class="col">
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-column my-3 mt-0 ">
           <label htmlFor="nombre">Nombre</label>
           <input
             type="text"
@@ -24,7 +24,7 @@
           >
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-column  my-3">
           <label htmlFor="name">Apellido</label>
           <input
             type="text"
@@ -45,7 +45,7 @@
         >
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-column  my-3">
           <label htmlFor="cedula">Cedula</label>
           <p-inputMask
             mask="999-9999999-9"
@@ -57,7 +57,7 @@
           ></p-inputMask>
         </div>
 
-        <div class="flex flex-column gap-2 flex-auto">
+        <div class="flex flex-column  my-3 flex-auto">
           <label htmlFor="sexo">Sexo</label>
           <p-dropdown
             [options]="sexs"
@@ -70,16 +70,18 @@
           ></p-dropdown>
         </div>
 
-        <div class="flex flex-column gap-2 flex-auto">
+        <div class="flex flex-column  my-3 flex-auto">
           <label htmlFor="fecha">Fecha Naciemiento</label>
-          <p-calendar
+          <div>
+            <input   class="w-full px-3 py-3 border-round  border-1 border-gray-400 cursor-pointer hover:border-primary animation-delay-200 transition-ease-in animation-duration-400 outline-none"  type="date" />
+
+          </div>
+          <!-- <p-calendar
             [showIcon]="true"
             [(ngModel)]="fechaNacimiento"
-
+            styleClass="z-5"
             formControlName="fechaNacimientoClient"
-            styleClass="w-full"
-            class="max-w-full"
-          ></p-calendar>
+          ></p-calendar> -->
         </div>
       </div>
 
