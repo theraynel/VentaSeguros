@@ -1,17 +1,26 @@
-
 export class segurosCommon {
-  constructor() {
-  }
+  constructor() {}
 
   getStatus(status: boolean): string {
     return status === true ? 'Activo' : 'Inactivo';
   }
 
   getSeverity(status: boolean) {
-    return status === true ? 'p-button-primary p-button-text' : 'p-button-danger p-button-text';
+    return status === true
+      ? 'p-button-primary p-button-text'
+      : 'p-button-danger p-button-text';
   }
 
-  getSexo(sex: string){
-    return sex === 'M'? 'Masculino' : 'Femenino'
+  getSexo(sex: string) {
+    return sex === 'M' ? 'Masculino' : 'Femenino';
+  }
+
+  getListSex() {
+    const list = [
+      { name: 'Masculino', code: 'M' },
+      { name: 'Femenino', code: 'F' },
+    ];
+
+    return list;
   }
 }

@@ -13,6 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TagModule } from 'primeng/tag';
 import { ChartModule } from 'primeng/chart';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { ChartModule } from 'primeng/chart';
     ReactiveFormsModule,
     ToolbarModule,
     TagModule,
-    ChartModule
+    ChartModule,
+    CalendarModule,
+    InputMaskModule,
+    DropdownModule
   ]
 })
 export class PrimeNgModule { }

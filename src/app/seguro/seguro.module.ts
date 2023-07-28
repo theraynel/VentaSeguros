@@ -14,6 +14,7 @@ import { DialogPlanComponent } from './pages/plans-page/dialog-plan/dialog-plan.
 import { DialogTypeComponent } from './pages/insurance-types-page/dialog-type/dialog-type.component';
 import { DialogAccountTypesComponent } from './pages/account-types-page/dialog-account-types/dialog-account-types.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DialogClientsComponent } from './pages/clients-page/dialog-clients/dialog-clients.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     DialogTypeComponent,
     DialogAccountTypesComponent,
     DashboardComponent,
+    DialogClientsComponent,
   ],
   imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule],
 })

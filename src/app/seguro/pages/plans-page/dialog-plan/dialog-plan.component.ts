@@ -20,7 +20,6 @@ export class DialogPlanComponent {
   public edad: number = 0;
   public id: number = 0;
   public estado: boolean = false;
-  // @inject(ref) public refr
 
   planForm = this.fb.group({
     codePlan: ['', Validators.required],
@@ -45,9 +44,6 @@ export class DialogPlanComponent {
   }
 
   addPlan() {
-
-    console.log("Cuota",this.cuota);
-
 
     const plan: Plans = {id: 0, codigo: this.code, nombre: this.name, cuota: this.cuota, edadMaxima: this.edad, estado: true};
 

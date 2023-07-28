@@ -5,5 +5,5 @@ export interface Clients
     apellido: string,
     cedula: string,
     fechaNacimiento: Date
-    sexo: string
+    sexo?: string
 }
