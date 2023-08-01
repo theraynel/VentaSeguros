@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { ButtonModule } from 'primeng/button';
@@ -38,7 +39,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ChartModule,
     CalendarModule,
     InputMaskModule,
-    DropdownModule
+    DropdownModule,
+    DatePipe
   ]
 })
 export class PrimeNgModule { }

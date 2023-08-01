@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
+
 import { Clients } from 'src/app/seguro/interfaces/clients';
 import { Sex } from 'src/app/seguro/interfaces/sex';
 import { ClientService } from 'src/app/seguro/services/client.service';
@@ -22,6 +23,7 @@ export class DialogClientsComponent implements OnInit {
   public fechaNacimiento: Date;
 
   public common = new segurosCommon();
+
 
   public sexs: Sex[] = [];
 
@@ -47,12 +49,13 @@ export class DialogClientsComponent implements OnInit {
     this.id = this.config.data.id;
     this.fechaNacimiento = new Date(this.config.data.fechaNacimiento);
 
-    console.log("this.fechaNacimiento",this.fechaNacimiento);
+    // console.log("this.fechaNacimiento",this.pipe.transform(this.fechaNacimiento, 'dd/MM/YYYY'));
 
   }
 
   ngOnInit() {
     this.sexs = this.common.getListSex();
+    this.fechaNacimiento = new Date(this.config.data.fechaNacimiento);
   }
 
   addPlan() {
@@ -61,11 +64,13 @@ export class DialogClientsComponent implements OnInit {
       nombre: this.nombre,
       apellido: this.apellido,
       cedula: this.cedula,
-      fechaNacimiento: this.fechaNacimiento,
+      fechaNacimiento: new Date(this.fechaNacimiento),
       sexo: this.sexo,
     };
 
     this.clientServices.addClient(client).subscribe((res) => {
+      console.log("res del api", res);
+
       if (res.id > 0) {
         this.ref.close(res);
       }else{
@@ -84,9 +89,15 @@ export class DialogClientsComponent implements OnInit {
         nombre: this.nombre,
         apellido: this.apellido,
         cedula: this.cedula,
-        fechaNacimiento: this.fechaNacimiento,
+        fechaNacimiento: new Date(this.fechaNacimiento),
         sexo: this.sexo,
       };
+
+      console.log("this.fechaNacimiento",this.fechaNacimiento);
+      console.log("this.fechaNacimiento2",new Date(this.fechaNacimiento));
+      // console.log("this.fechaNacimiento33",this.pipe.transform(this.fechaNacimiento, 'dd/MM/YYYY'));
+      console.log("cliente",client);
+
 
       this.clientServices.editClient(this.id, client).subscribe((res) => {
         if (res === null) {

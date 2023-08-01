@@ -42,7 +42,7 @@ export class ClientsPageComponent implements OnInit {
   openNew() {
     this.ref = this.dialogService.open(DialogClientsComponent, {
       header: 'Crear Cliente',
-    //  width: '90%',
+
       data: this.client,
     });
 
