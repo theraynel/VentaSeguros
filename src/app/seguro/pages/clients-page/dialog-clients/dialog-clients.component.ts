@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
-
 import { Clients } from 'src/app/seguro/interfaces/clients';
 import { Sex } from 'src/app/seguro/interfaces/sex';
 import { ClientService } from 'src/app/seguro/services/client.service';
@@ -19,11 +18,10 @@ export class DialogClientsComponent implements OnInit {
   public apellido: string = '';
   public cedula: string = '';
   public id: number = 0;
-  public sexo: string ='';
+  public sexo: string = '';
   public fechaNacimiento: Date;
 
   public common = new segurosCommon();
-
 
   public sexs: Sex[] = [];
 
@@ -48,9 +46,6 @@ export class DialogClientsComponent implements OnInit {
     this.sexo = this.config.data.sexo;
     this.id = this.config.data.id;
     this.fechaNacimiento = new Date(this.config.data.fechaNacimiento);
-
-    // console.log("this.fechaNacimiento",this.pipe.transform(this.fechaNacimiento, 'dd/MM/YYYY'));
-
   }
 
   ngOnInit() {
@@ -58,7 +53,7 @@ export class DialogClientsComponent implements OnInit {
     this.fechaNacimiento = new Date(this.config.data.fechaNacimiento);
   }
 
-  addPlan() {
+  addClient() {
     const client: Clients = {
       id: 0,
       nombre: this.nombre,
@@ -69,20 +64,24 @@ export class DialogClientsComponent implements OnInit {
     };
 
     this.clientServices.addClient(client).subscribe((res) => {
-      console.log("res del api", res);
+      const valor: any = res;
 
       if (res.id > 0) {
         this.ref.close(res);
-      }else{
+      } else {
+        console.log('Entro 1');
+
         this.mess.add({
           severity: 'error',
-          summary: 'Plan Creado',
-          detail: 'A ocurrido un error al crear Plan',
+          summary: 'Cliente Creado',
+          detail: valor,
         });
+
+        this.ref.close(res);
       }
     });
   }
-  editPlan() {
+  editClient() {
     if (this.id > 0) {
       const client: Clients = {
         id: this.id,
@@ -93,21 +92,18 @@ export class DialogClientsComponent implements OnInit {
         sexo: this.sexo,
       };
 
-      console.log("this.fechaNacimiento",this.fechaNacimiento);
-      console.log("this.fechaNacimiento2",new Date(this.fechaNacimiento));
-      // console.log("this.fechaNacimiento33",this.pipe.transform(this.fechaNacimiento, 'dd/MM/YYYY'));
-      console.log("cliente",client);
-
-
       this.clientServices.editClient(this.id, client).subscribe((res) => {
+        const valor: any = res;
+
         if (res === null) {
           this.ref.close(client);
         } else {
           this.mess.add({
             severity: 'error',
             summary: 'Cliente Editado',
-            detail: 'A ocurrido un error al intentar editar el Plan!',
+            detail: valor,
           });
+          this.ref.close(res);
         }
       });
     } else {

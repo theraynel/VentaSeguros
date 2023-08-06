@@ -18,12 +18,19 @@ export class ClientsPageComponent implements OnInit {
 
   public clientlts: Clients[] = [];
 
-  public client: Clients = { id: 0, nombre: '', apellido: '', cedula: '', fechaNacimiento: new Date, sexo: ''};
+  public client: Clients = {
+    id: 0,
+    nombre: '',
+    apellido: '',
+    cedula: '',
+    fechaNacimiento: new Date(),
+    sexo: '',
+  };
 
-  public common = new segurosCommon;
+  public common = new segurosCommon();
 
   constructor(
-    private mess : MessageService,
+    private mess: MessageService,
     private confirmationService: ConfirmationService,
     private clientService: ClientService,
     public dialogService: DialogService
@@ -33,10 +40,10 @@ export class ClientsPageComponent implements OnInit {
     this.getClients();
   }
 
-  getClients(){
-     this.clientService.getClients().subscribe( (res: any) =>{
-        this.clientlts = res;
-     })
+  getClients() {
+    this.clientService.getClients().subscribe((res: any) => {
+      this.clientlts = res;
+    });
   }
 
   openNew() {
@@ -51,11 +58,13 @@ export class ClientsPageComponent implements OnInit {
 
       console.log(client);
       if (client !== undefined) {
-        this.mess.add({
-          severity: 'success',
-          summary: 'Cliente Creado',
-          detail: `Cliente ${ client.nombre } creado con Exito!`
-        });
+        if (client.id > 0) {
+          this.mess.add({
+            severity: 'success',
+            summary: 'Cliente Creado',
+            detail: `Cliente ${client.nombre} creado con Exito!`,
+          });
+        }
       }
     });
   }
@@ -71,11 +80,13 @@ export class ClientsPageComponent implements OnInit {
 
       console.log(client);
       if (client !== undefined) {
-        this.mess.add({
-          severity: 'success',
-          summary: 'Cliente Editado',
-          detail: `Cliente ${ client.nombre } editado con Exito!`
-        });
+        if (client.id > 0) {
+          this.mess.add({
+            severity: 'success',
+            summary: 'Cliente Editado',
+            detail: `Cliente ${client.nombre} editado con Exito!`,
+          });
+        }
       }
     });
   }
@@ -86,16 +97,16 @@ export class ClientsPageComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.clientService.deleteClient(client.id).subscribe((res) =>{
+        this.clientService.deleteClient(client.id).subscribe((res) => {
           if (res === null) {
-             this.getClients();
-             this.mess.add({
+            this.getClients();
+            this.mess.add({
               severity: 'info',
               summary: 'Confirmed',
               detail: 'Registro eliminado Correctamente!',
             });
           }
-       });
+        });
       },
     });
   }
