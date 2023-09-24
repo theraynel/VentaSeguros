@@ -18,8 +18,7 @@ export class ClientService {
 
   url:string = 'https://localhost:44330/api/Cliente'
 
-  constructor(
-               private http: HttpClient) { }
+  constructor( private http: HttpClient ) { }
 
   getClients(): Observable<Clients>{
     return this.http.get<Clients>(this.url)

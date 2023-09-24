@@ -3,9 +3,9 @@ export interface InsuranceSale
     id: number,
     idCliente: number,
     fechaVenta: Date,
-    Montocuota: number,
+    montocuota: number,
     noProducto: string,
-    NoSeguro: string,
+    noSeguro: string,
     idTiposeguro: number,
     idPlan: number,
     idTipoCuenta: number

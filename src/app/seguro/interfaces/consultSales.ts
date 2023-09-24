@@ -1,18 +1,22 @@
 export interface ConsultSales
 {
-    id: number,
-    nombre: string,
-    apellido: string,
+    idVenta: number,
+    idCliente: number,
+    cliente: string,
     cedula: string,
     fechaNacimiento: Date
+    sexo?: string,
     fechaVenta: Date,
-    NoSeguro: string,
-    Montocuota: number,
+    noSeguro: string,
+    montocuota: number,
     noProducto: number,
     idTiposeguro: number,
-    tipoSeguro: string,
+    codTiposeguro: string,
+    nombreTiposeguro: string,
     idPlan: number,
-    tipoPlan: string,
+    codPlan: string,
+    nombrePlan: string,
     idTipoCuenta: number,
-    tipoCuenta: string
+    codTipoCuenta: string,
+    nombreTipoCuenta: string
 }

@@ -1,1 +1,113 @@
-<p>insurance-sale works!</p>
+<form [formGroup]="clientForm" (ngSubmit)="id != 0 ? editClient() : addClient()">
+  <div class="card">
+    <p-toast></p-toast>
+    <div class="row">
+      <div class="col">
+        <div class="flex flex-column my-3 mt-0">
+          <label htmlFor="nombre">Nombre</label>
+          <input
+            type="text"
+            pInputText
+            id="name"
+            [(ngModel)]="nombre"
+            placeholder="Nombre"
+            formControlName="nameClient"
+          />
+
+          <small
+            class="p-error block"
+            *ngIf="
+              clientForm.get('nameClient')?.invalid &&
+              clientForm.get('nameClient')?.dirty
+            "
+            >El nombre es requerido</small
+          >
+        </div>
+
+        <div class="flex flex-column my-3">
+          <label htmlFor="name">Apellido</label>
+          <input
+            type="text"
+            pInputText
+            id="lastName"
+            [(ngModel)]="apellido"
+            placeholder="Apellido"
+            formControlName="apellidoClient"
+          />
+
+          <small
+            class="p-error block"
+            *ngIf="
+              clientForm.get('apellidoClient')?.invalid &&
+              clientForm.get('apellidoClient')?.dirty
+            "
+            >El apellido es requerido</small
+          >
+        </div>
+
+        <div class="flex flex-column my-3">
+          <label htmlFor="cedula">Cedula</label>
+          <p-inputMask
+            mask="999-9999999-9"
+            [(ngModel)]="cedula"
+            placeholder="999-9999999-9"
+            formControlName="cedulaClient"
+            styleClass="w-full"
+            id="cedula"
+          ></p-inputMask>
+        </div>
+
+        <div class="flex flex-column my-3 flex-auto">
+          <label htmlFor="sexo">Sexo</label>
+          <p-dropdown
+            [options]="sexs"
+            [(ngModel)]="sexo"
+            placeholder="Select a Sexo"
+            formControlName="sexoClient"
+            optionLabel="name"
+            optionValue="code"
+            styleClass="w-full"
+          ></p-dropdown>
+        </div>
+
+        <div class="flex flex-column my-3 flex-auto">
+          <label htmlFor="fecha">Fecha Naciemiento</label>
+          <!-- <div>
+            <input
+              class="w-full px-3 py-3 border-round border-1 border-gray-400 cursor-pointer hover:border-primary animation-delay-200 transition-ease-in animation-duration-400 outline-none"
+              type="date"
+              [(ngModel)] ="fechaNacimiento"
+              formControlName="fechaNacimientoClient"
+              required="true"
+            />
+
+          </div> -->
+          <p-calendar
+            [showIcon]="true"
+            [(ngModel)]="fechaNacimiento"
+            appendTo="body"
+            formControlName="fechaNacimientoClient"
+            [required]="true"
+          ></p-calendar>
+        </div>
+      </div>
+
+      <div class="flex gap-6">
+        <button
+          label="Save"
+          type="submit"
+          [disabled]="clientForm.invalid"
+          pButton
+          icon="pi pi-save"
+        ></button>
+        <button
+          label="Cancel"
+          type="button"
+          pButton
+          icon="pi pi-times"
+          (click)="close()"
+        ></button>
+      </div>
+    </div>
+  </div>
+</form>
