@@ -1,26 +1,78 @@
-<form [formGroup]="clientForm" (ngSubmit)="id != 0 ? editClient() : addClient()">
+<form [formGroup]="SalesForm" (ngSubmit)="id != 0 ? editClient() : addClient()">
   <div class="card">
     <p-toast></p-toast>
     <div class="row">
       <div class="col">
+        <div class="flex flex-column my-3 flex-auto">
+          <label htmlFor="sexo">Cliente</label>
+          <p-dropdown
+            [options]="clients"
+            [(ngModel)]="clienteId"
+            placeholder="Selecciona un Cliente"
+            formControlName="clientSale"
+            optionLabel="nombreCompleto"
+            optionValue="id"
+            styleClass="w-full"
+          ></p-dropdown>
+        </div>
+
         <div class="flex flex-column my-3 mt-0">
-          <label htmlFor="nombre">Nombre</label>
+          <label htmlFor="planId">Plan</label>
+          <p-dropdown
+            [options]="plans"
+            [(ngModel)]="planId"
+            placeholder="Selecciona un Plan"
+            formControlName="planSale"
+            optionLabel="nombre"
+            optionValue="id"
+            styleClass="w-full"
+          ></p-dropdown>
+        </div>
+
+        <div class="flex flex-column my-3 flex-auto">
+          <label htmlFor="InsranceTypeId">Tipo de Seguro</label>
+          <p-dropdown
+            [options]="type"
+            [(ngModel)]="InsranceTypeId"
+            placeholder="Selecciona un Tipo Seguro"
+            formControlName="insuranceSale"
+            optionLabel="nombre"
+            optionValue="id"
+            styleClass="w-full"
+          ></p-dropdown>
+        </div>
+
+        <div class="flex flex-column my-3">
+          <label htmlFor="cedula">Tipo Cuenta</label>
+          <p-dropdown
+            [options]="account"
+            [(ngModel)]="accountTypeId"
+            placeholder="Selecciona un Tipo Cuenta"
+            formControlName="acountSale"
+            optionLabel="nombre"
+            optionValue="id"
+            styleClass="w-full"
+          ></p-dropdown>
+        </div>
+
+        <div class="flex flex-column my-3">
+          <label htmlFor="name">No. Producto</label>
           <input
             type="text"
             pInputText
-            id="name"
-            [(ngModel)]="nombre"
-            placeholder="Nombre"
-            formControlName="nameClient"
+            id="lastName"
+            [(ngModel)]="noProducto"
+            placeholder="No. Producto"
+            formControlName="noProductoSale"
           />
 
           <small
             class="p-error block"
             *ngIf="
-              clientForm.get('nameClient')?.invalid &&
-              clientForm.get('nameClient')?.dirty
+              SalesForm.get('noProductoSale')?.invalid &&
+              SalesForm.get('noProductoSale')?.dirty
             "
-            >El nombre es requerido</small
+            >El No. Producto es requerido</small
           >
         </div>
 
@@ -30,63 +82,28 @@
             type="text"
             pInputText
             id="lastName"
-            [(ngModel)]="apellido"
-            placeholder="Apellido"
-            formControlName="apellidoClient"
+            [(ngModel)]="noSeguro"
+            placeholder="No. Seguro"
+            formControlName="noSeguroSale"
           />
 
           <small
             class="p-error block"
             *ngIf="
-              clientForm.get('apellidoClient')?.invalid &&
-              clientForm.get('apellidoClient')?.dirty
+              SalesForm.get('noSeguroSale')?.invalid &&
+              SalesForm.get('noSeguroSale')?.dirty
             "
-            >El apellido es requerido</small
+            >El No. Seguro es requerido</small
           >
         </div>
 
-        <div class="flex flex-column my-3">
-          <label htmlFor="cedula">Cedula</label>
-          <p-inputMask
-            mask="999-9999999-9"
-            [(ngModel)]="cedula"
-            placeholder="999-9999999-9"
-            formControlName="cedulaClient"
-            styleClass="w-full"
-            id="cedula"
-          ></p-inputMask>
-        </div>
-
         <div class="flex flex-column my-3 flex-auto">
-          <label htmlFor="sexo">Sexo</label>
-          <p-dropdown
-            [options]="sexs"
-            [(ngModel)]="sexo"
-            placeholder="Select a Sexo"
-            formControlName="sexoClient"
-            optionLabel="name"
-            optionValue="code"
-            styleClass="w-full"
-          ></p-dropdown>
-        </div>
-
-        <div class="flex flex-column my-3 flex-auto">
-          <label htmlFor="fecha">Fecha Naciemiento</label>
-          <!-- <div>
-            <input
-              class="w-full px-3 py-3 border-round border-1 border-gray-400 cursor-pointer hover:border-primary animation-delay-200 transition-ease-in animation-duration-400 outline-none"
-              type="date"
-              [(ngModel)] ="fechaNacimiento"
-              formControlName="fechaNacimientoClient"
-              required="true"
-            />
-
-          </div> -->
+          <label htmlFor="fecha">Fecha </label>
           <p-calendar
             [showIcon]="true"
-            [(ngModel)]="fechaNacimiento"
+            [(ngModel)]="fechaVenta"
             appendTo="body"
-            formControlName="fechaNacimientoClient"
+            formControlName="fechaVentaSale"
             [required]="true"
           ></p-calendar>
         </div>
@@ -96,7 +113,7 @@
         <button
           label="Save"
           type="submit"
-          [disabled]="clientForm.invalid"
+          [disabled]="SalesForm.invalid"
           pButton
           icon="pi pi-save"
         ></button>
