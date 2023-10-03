@@ -30,6 +30,12 @@ export class SaleService {
   }
 
   editSales(id: number, sale: InsuranceSale): Observable<InsuranceSale> {
-    return this.http.put<InsuranceSale>(`${this.url}/${id}`, sale, httpOption);
+    console.log("Id and Sale recibido", id, sale);
+    const urls = `${this.url}/${id}`;
+
+    console.log(urls);
+
+
+    return this.http.put<InsuranceSale>(urls, sale, httpOption);
   }
 }

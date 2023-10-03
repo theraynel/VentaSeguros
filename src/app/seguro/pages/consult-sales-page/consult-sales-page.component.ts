@@ -4,6 +4,7 @@ import { InsuranceSale } from '../../interfaces/insuranceSale';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { InsuranceSaleComponent } from './insurance-sale/insurance-sale.component';
+import { ConsultSales } from '../../interfaces/consultSales';
 
 @Component({
   selector: 'app-consult-sales-page',
@@ -15,7 +16,7 @@ import { InsuranceSaleComponent } from './insurance-sale/insurance-sale.componen
 export class ConsultSalesPageComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
 
-  public saleslts: InsuranceSale[] = [];
+  public saleslts: ConsultSales[] = [];
 
  public sales: InsuranceSale = {
     id: 0,
@@ -53,7 +54,6 @@ export class ConsultSalesPageComponent implements OnInit {
   openNew() {
     this.ref = this.dialogService.open(InsuranceSaleComponent, {
       header: 'Venta Seguro',
-
       data: this.sales,
     });
 
@@ -73,10 +73,22 @@ export class ConsultSalesPageComponent implements OnInit {
     });
   }
 
-  editClient(sale: InsuranceSale) {
+  editSales(sale: ConsultSales) {
+    const saleInfo: InsuranceSale = {
+      id: sale.idVenta,
+      idCliente: sale.idCliente,
+      idPlan: sale.idPlan,
+      idTipoCuenta: sale.idTipoCuenta,
+      idTiposeguro: sale.idTiposeguro,
+      fechaVenta: sale.fechaVenta,
+      montocuota: sale.montocuota,
+      noProducto: sale.noProducto,
+      noSeguro: sale.noSeguro
+    };
+
     this.ref = this.dialogService.open(InsuranceSaleComponent, {
       header: 'Editar Venta Seguro',
-      data: sale,
+      data: saleInfo,
     });
 
     this.ref.onClose.subscribe((sales) => {

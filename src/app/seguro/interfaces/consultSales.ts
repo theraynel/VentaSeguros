@@ -9,7 +9,7 @@ export interface ConsultSales
     fechaVenta: Date,
     noSeguro: string,
     montocuota: number,
-    noProducto: number,
+    noProducto: string,
     idTiposeguro: number,
     codTiposeguro: string,
     nombreTiposeguro: string,
