@@ -29,16 +29,31 @@ export class ClientService {
   }
 
   addClient(client: Clients):Observable<Clients>{
-    return this.http
-               .post<Clients>(this.url, client, httpOption);
+    return this.http.post<Clients>(this.url, client, httpOption)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+         return of(error.error)
+      })
+    )
   }
 
   editClient(id: number, client: Clients):Observable<Clients>{
-    return this.http.put<Clients>(`${this.url}/${id}`, client, httpOption);
+    return this.http.put<Clients>(`${this.url}/${id}`, client, httpOption)
+    .pipe(
+      catchError((error: HttpErrorResponse) =>{
+        return of(error.error)
+      })
+    );
   }
 
   deleteClient(id: number): Observable<Clients>{
-    return this.http.delete<Clients>(`${this.url}/${id}`);
+    return this.http.delete<Clients>(`${this.url}/${id}`)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        return of(error.error)
+      })
+    )
+    ;
   }
 
 

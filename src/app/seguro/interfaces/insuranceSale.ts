@@ -8,5 +8,6 @@ export interface InsuranceSale
     noSeguro: string,
     idTiposeguro: number,
     idPlan: number,
-    idTipoCuenta: number
+    idTipoCuenta: number,
+    estado: boolean
 }

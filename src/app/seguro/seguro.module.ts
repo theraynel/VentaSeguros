@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClientsPageComponent } from './pages/clients-page/clients-page.component';
 import { PlansPageComponent } from './pages/plans-page/plans-page.component';
@@ -30,6 +30,6 @@ import { DialogClientsComponent } from './pages/clients-page/dialog-clients/dial
     DashboardComponent,
     DialogClientsComponent,
   ],
-  imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule, ReactiveFormsModule],
 })
 export class SeguroModule {}

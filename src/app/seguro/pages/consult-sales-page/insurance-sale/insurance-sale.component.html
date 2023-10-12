@@ -4,9 +4,11 @@
     <div class="row">
       <div class="col">
         <div class="flex flex-column my-3 flex-auto">
-          <label htmlFor="sexo">Cliente</label>
+          <label htmlFor="cliente">Cliente</label>
           <p-dropdown
+            [disabled]="true"
             [options]="clients"
+            [disabled]="true"
             [(ngModel)]="clienteId"
             placeholder="Selecciona un Cliente"
             formControlName="clientSale"
@@ -22,10 +24,10 @@
             [options]="plans"
             [(ngModel)]="planId"
             placeholder="Selecciona un Plan"
-            formControlName="planSale"
             optionLabel="nombre"
             optionValue="id"
             styleClass="w-full"
+            formControlName="planSale"
           ></p-dropdown>
         </div>
 
@@ -124,7 +126,9 @@
           icon="pi pi-times"
           (click)="close()"
         ></button>
-      </div>
+      </div >
     </div>
   </div>
 </form>
+
+

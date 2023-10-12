@@ -5,6 +5,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { InsuranceSaleComponent } from './insurance-sale/insurance-sale.component';
 import { ConsultSales } from '../../interfaces/consultSales';
+import { segurosCommon } from 'src/app/shared/common/common';
 
 @Component({
   selector: 'app-consult-sales-page',
@@ -18,6 +19,8 @@ export class ConsultSalesPageComponent implements OnInit {
 
   public saleslts: ConsultSales[] = [];
 
+  public common = new segurosCommon();
+
  public sales: InsuranceSale = {
     id: 0,
     idCliente: 0,
@@ -27,7 +30,8 @@ export class ConsultSalesPageComponent implements OnInit {
     noSeguro: '',
     idTiposeguro: 0,
     idPlan: 0,
-    idTipoCuenta: 0
+    idTipoCuenta: 0,
+    estado: true
 }
   constructor(
        private mess: MessageService,
@@ -83,7 +87,8 @@ export class ConsultSalesPageComponent implements OnInit {
       fechaVenta: sale.fechaVenta,
       montocuota: sale.montocuota,
       noProducto: sale.noProducto,
-      noSeguro: sale.noSeguro
+      noSeguro: sale.noSeguro,
+      estado : sale.estado
     };
 
     this.ref = this.dialogService.open(InsuranceSaleComponent, {
@@ -105,6 +110,32 @@ export class ConsultSalesPageComponent implements OnInit {
         }
       }
     });
+  }
+
+  updateStatus(sale: ConsultSales) {
+    if (sale.estado == true) sale.estado = false;
+    else sale.estado = true;
+
+    const saleInfo: InsuranceSale = {
+      id: sale.idVenta,
+      idCliente: sale.idCliente,
+      idPlan: sale.idPlan,
+      idTipoCuenta: sale.idTipoCuenta,
+      idTiposeguro: sale.idTiposeguro,
+      fechaVenta: sale.fechaVenta,
+      montocuota: sale.montocuota,
+      noProducto: sale.noProducto,
+      noSeguro: sale.noSeguro,
+      estado: sale.estado
+    };
+
+    this.saleService
+      .editSales(saleInfo.id, saleInfo)
+      .subscribe((res) => {
+        if (res === null) {
+          this.getSales();
+        }
+      });
   }
 
 

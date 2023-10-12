@@ -1,10 +1,10 @@
+import { Clients } from './../../../interfaces/clients';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ClientService } from 'src/app/seguro/services/client.service';
 import { segurosCommon } from 'src/app/shared/common/common';
-import { Clients } from 'src/app/seguro/interfaces/clients';
 import { PlansService } from 'src/app/seguro/services/plans.service';
 import { Plans } from 'src/app/seguro/interfaces/plans';
 import { AccountTypeService } from 'src/app/seguro/services/account-type.service';
@@ -19,7 +19,7 @@ import { SaleService } from '../../../services/sale.service';
   templateUrl: './insurance-sale.component.html',
   styles: [],
 })
-export class InsuranceSaleComponent {
+export class InsuranceSaleComponent  {
   public clienteId: number = 0;
   public planId: number = 0;
   public accountTypeId: number = 0;
@@ -29,23 +29,27 @@ export class InsuranceSaleComponent {
   public noProducto: string = '';
   public noSeguro: string = '';
   public montocuota: number = 0;
+  public estado: boolean = true;
 
   public common = new segurosCommon();
 
-  public clients: Clients[] = [];
+  public clients: Clients[] | undefined;
+  public sususus : Clients | undefined;
   public plans: Plans[] = [];
   public account: AccountTypes[] = [];
   public type: InsuranceTypes[] = [];
 
-  SalesForm = this.fb.group({
-    clientSale: ['', Validators.required],
-    planSale: ['', Validators.required],
-    acountSale: ['', Validators.required],
-    insuranceSale: ['', Validators.required],
-    fechaVentaSale: ['', Validators.required],
-    noProductoSale: ['', Validators.required],
-    noSeguroSale: ['', Validators.required],
+   SalesForm = new FormGroup({
+    clientSale: new FormControl('',Validators.required),
+    planSale: new FormControl('', Validators.required),
+    acountSale: new FormControl('', Validators.required),
+    insuranceSale: new FormControl('', Validators.required),
+    fechaVentaSale: new FormControl('', Validators.required),
+    noProductoSale: new FormControl('', Validators.required),
+    noSeguroSale: new FormControl('', Validators.required),
   });
+
+
 
   constructor(
     private clientService: ClientService,
@@ -56,7 +60,7 @@ export class InsuranceSaleComponent {
     public ref: DynamicDialogRef,
     private mess: MessageService,
     private config: DynamicDialogConfig,
-    private fb: FormBuilder
+   // private fb: FormBuilder
   ) {
     this.clienteId = this.config.data.idCliente;
     this.planId = this.config.data.idPlan;
@@ -67,8 +71,10 @@ export class InsuranceSaleComponent {
     this.id = this.config.data.id;
     this.fechaVenta = new Date(this.config.data.fechaVenta);
     this.montocuota = this.config.data.montocuota;
+    this.estado = this.config.data.estado;
 
     console.log("idcliente",this.clienteId);
+    console.log("id",this.id);
 
   }
 
@@ -134,6 +140,7 @@ export class InsuranceSaleComponent {
         montocuota: this.montocuota,
         noProducto: this.noProducto,
         noSeguro: this.noSeguro,
+        estado: this.estado
       };
 
       console.log("Sales",sale);
@@ -164,6 +171,10 @@ export class InsuranceSaleComponent {
   //#endregion
 
   addSales() {
+
+console.log("Monto Cuota",this.montocuota);
+
+
     const sale: InsuranceSale = {
       id: 0,
       idCliente: this.clienteId,
@@ -174,16 +185,18 @@ export class InsuranceSaleComponent {
       montocuota: this.montocuota,
       noProducto: this.noProducto,
       noSeguro: this.noSeguro,
+      estado: this.estado
     };
 
     this.salesServices.addSales(sale).subscribe((res) => {
       const valor: any = res;
+
       if (res.id > 0) {
         this.ref.close(sale);
       } else {
         this.mess.add({
           severity: 'error',
-          summary: 'Venta Seguro Editada',
+          summary: 'Venta Seguro',
           detail: valor,
         });
         this.ref.close(res);

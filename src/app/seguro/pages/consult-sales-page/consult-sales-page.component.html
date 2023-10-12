@@ -25,7 +25,8 @@
       'noProducto',
       'fechaVenta',
       'nombreTiposeguro',
-      'nombreTipoCuenta'
+      'nombreTipoCuenta',
+      'estado'
     ]"
     [rowHover]="true"
     dataKey="id"
@@ -55,6 +56,7 @@
         <th pSortableColumn="fechaVenta">Fecha Venta <p-sortIcon field="fechaVenta"></p-sortIcon></th>
         <th pSortableColumn="nombreTiposeguro">Tipo Seguro<p-sortIcon field="nombreTiposeguro"></p-sortIcon></th>
         <th pSortableColumn="nombreTipoCuenta">Tipo Cuenta<p-sortIcon field="nombreTipoCuenta"></p-sortIcon></th>
+        <th pSortableColumn="estado">Estado<p-sortIcon field="estado"></p-sortIcon></th>
         <th>Opciones</th>
       </tr>
     </ng-template>
@@ -67,6 +69,13 @@
         <td>{{ sale.fechaVenta | date:'dd/MM/YYYY' }}</td>
         <td>{{ sale.nombreTiposeguro}}</td>
         <td>{{ sale.nombreTipoCuenta}}</td>
+        <td>
+          <p-button
+            [label]="common.getStatus(sale.estado)"
+            (onClick)="updateStatus(sale)"
+            [styleClass]="common.getSeverity(sale.estado)"
+          ></p-button>
+        </td>
         <td class="flex p-1" style="font-size: 8x">
           <button
             title="prueba"

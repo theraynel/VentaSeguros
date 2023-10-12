@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { FormBuilder, Validator, Validators } from '@angular/forms';
+import { FormGroup, FormControl,  Validators } from '@angular/forms';
 
 import { AccountTypes } from './../../../interfaces/accountTypes';
 
@@ -23,9 +23,9 @@ export class DialogAccountTypesComponent {
 
   public respose? : AccountTypes;
 
-  accountForm = this.fb.group({
-    nameGroup : ['', Validators.required],
-    codeGroup : ['',Validators.required]
+  accountForm = new FormGroup ({
+    nameGroup : new FormControl('', Validators.required),
+    codeGroup : new FormControl('',Validators.required)
   });
 
   constructor(
@@ -33,7 +33,7 @@ export class DialogAccountTypesComponent {
     public ref: DynamicDialogRef,
     public mess:MessageService,
     public config: DynamicDialogConfig,
-    private fb: FormBuilder
+   // private fb: FormBuilder
   ){
     this.name = config.data.nombre;
     this.code = this.config.data.codigo;

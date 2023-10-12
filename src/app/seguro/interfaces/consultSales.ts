@@ -18,5 +18,6 @@ export interface ConsultSales
     nombrePlan: string,
     idTipoCuenta: number,
     codTipoCuenta: string,
-    nombreTipoCuenta: string
+    nombreTipoCuenta: string,
+    estado:boolean
 }
