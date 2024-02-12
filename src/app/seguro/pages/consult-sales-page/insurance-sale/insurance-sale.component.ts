@@ -1,5 +1,5 @@
 import { Clients } from './../../../interfaces/clients';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -19,7 +19,7 @@ import { SaleService } from '../../../services/sale.service';
   templateUrl: './insurance-sale.component.html',
   styles: [],
 })
-export class InsuranceSaleComponent  {
+export class InsuranceSaleComponent implements OnInit {
   public clienteId: number = 0;
   public planId: number = 0;
   public accountTypeId: number = 0;
@@ -34,13 +34,13 @@ export class InsuranceSaleComponent  {
   public common = new segurosCommon();
 
   public clients: Clients[] | undefined;
-  public sususus : Clients | undefined;
+  public sususus: Clients | undefined;
   public plans: Plans[] = [];
   public account: AccountTypes[] = [];
   public type: InsuranceTypes[] = [];
 
-   SalesForm = new FormGroup({
-    clientSale: new FormControl('',Validators.required),
+  SalesForm = new FormGroup({
+    clientSale: new FormControl('', Validators.required),
     planSale: new FormControl('', Validators.required),
     acountSale: new FormControl('', Validators.required),
     insuranceSale: new FormControl('', Validators.required),
@@ -48,8 +48,6 @@ export class InsuranceSaleComponent  {
     noProductoSale: new FormControl('', Validators.required),
     noSeguroSale: new FormControl('', Validators.required),
   });
-
-
 
   constructor(
     private clientService: ClientService,
@@ -59,8 +57,7 @@ export class InsuranceSaleComponent  {
     private salesServices: SaleService,
     public ref: DynamicDialogRef,
     private mess: MessageService,
-    private config: DynamicDialogConfig,
-   // private fb: FormBuilder
+    private config: DynamicDialogConfig // private fb: FormBuilder
   ) {
     this.clienteId = this.config.data.idCliente;
     this.planId = this.config.data.idPlan;
@@ -73,9 +70,8 @@ export class InsuranceSaleComponent  {
     this.montocuota = this.config.data.montocuota;
     this.estado = this.config.data.estado;
 
-    console.log("idcliente",this.clienteId);
-    console.log("id",this.id);
-
+    console.log('idcliente', this.clienteId);
+    console.log('id', this.id);
   }
 
   ngOnInit() {
@@ -140,11 +136,10 @@ export class InsuranceSaleComponent  {
         montocuota: this.montocuota,
         noProducto: this.noProducto,
         noSeguro: this.noSeguro,
-        estado: this.estado
+        estado: this.estado,
       };
 
-      console.log("Sales",sale);
-
+      console.log('Sales', sale);
 
       this.salesServices.editSales(this.id, sale).subscribe((res) => {
         const valor: any = res;
@@ -171,9 +166,7 @@ export class InsuranceSaleComponent  {
   //#endregion
 
   addSales() {
-
-console.log("Monto Cuota",this.montocuota);
-
+    console.log('Monto Cuota', this.montocuota);
 
     const sale: InsuranceSale = {
       id: 0,
@@ -185,7 +178,7 @@ console.log("Monto Cuota",this.montocuota);
       montocuota: this.montocuota,
       noProducto: this.noProducto,
       noSeguro: this.noSeguro,
-      estado: this.estado
+      estado: this.estado,
     };
 
     this.salesServices.addSales(sale).subscribe((res) => {

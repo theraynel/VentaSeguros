@@ -53,6 +53,11 @@ export class MenuComponent implements OnInit {
             icon: 'pi pi-cart-plus',
             routerLink: 'consultSale'
           },
+          {
+             label: 'Facturacion',
+             icon: 'pi pi-credit-card',
+             routerLink: 'billing'
+          },
         ],
       },
     ];
