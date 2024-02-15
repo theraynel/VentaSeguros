@@ -9,8 +9,8 @@ export interface BillingDetail
    tipoSeguro: string,
    idTipoCuenta: number,
    tipoCuenta: string,
-   NoProducto: string
-   NoSeguro: string,
+   noProducto: string
+   noSeguro: string,
    montoCuota: number,
    estado: boolean
 }

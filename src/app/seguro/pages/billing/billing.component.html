@@ -5,9 +5,11 @@
       <button
         pButton
         pRipple
+        title="Nuevo"
         label="New"
         icon="pi pi-plus"
         class="p-button-primary mr-2"
+        (click)="openNew()"
       ></button>
     </ng-template>
   </p-toolbar>
@@ -79,6 +81,7 @@
             [label]="common.getStatus(client.estado)"
             (onClick)="updateStatus(client)"
             [styleClass]="common.getSeverity(client.estado)"
+            title="CancelaR"
           ></p-button>
         </td>
         <td class="flex " style="font-size: 8x">

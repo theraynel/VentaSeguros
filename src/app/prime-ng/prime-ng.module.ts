@@ -17,6 +17,7 @@ import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { DropdownModule } from 'primeng/dropdown';
+import { PanelModule } from 'primeng/panel';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DropdownModule } from 'primeng/dropdown';
     CalendarModule,
     InputMaskModule,
     DropdownModule,
-    DatePipe
+    DatePipe,
+    PanelModule
   ]
 })
 export class PrimeNgModule { }

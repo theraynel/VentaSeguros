@@ -16,6 +16,9 @@ import { DialogAccountTypesComponent } from './pages/account-types-page/dialog-a
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DialogClientsComponent } from './pages/clients-page/dialog-clients/dialog-clients.component';
 import { BillingComponent } from './pages/billing/billing.component';
+import { BillingDetailsComponent } from './pages/billing/billing-details/billing-details.component';
+import { DialogBillingComponent } from './pages/billing/dialog-billing/dialog-billing.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { BillingComponent } from './pages/billing/billing.component';
     DashboardComponent,
     DialogClientsComponent,
     BillingComponent,
+    BillingDetailsComponent,
+    DialogBillingComponent
   ],
   imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule, ReactiveFormsModule],
 })

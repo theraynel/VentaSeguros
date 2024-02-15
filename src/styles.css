@@ -12,3 +12,13 @@
 body {
   font-family: var(--font-family);
 }
+
+.factura-row {
+  display: flex; /* Utiliza flexbox para distribuir los elementos en fila */
+  margin-bottom: 10px; /* Espacio entre filas */
+}
+
+.factura-column {
+  flex: 1; /* El tamaño de la columna se ajusta automáticamente */
+  padding: 5px;
+}

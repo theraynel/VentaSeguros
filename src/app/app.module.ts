@@ -10,7 +10,7 @@ import { SeguroModule } from './seguro/seguro.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
