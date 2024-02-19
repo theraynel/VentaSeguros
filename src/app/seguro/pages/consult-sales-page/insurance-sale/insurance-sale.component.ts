@@ -115,6 +115,7 @@ export class InsuranceSaleComponent implements OnInit {
         cedula: t.cedula,
         apellido: t.apellido,
         sexo: t.sexo,
+        email: t.email,
         fechaNacimiento: t.fechaNacimiento,
         nombreCompleto: `${t.nombre} ${t.apellido}`,
       };
@@ -184,8 +185,10 @@ export class InsuranceSaleComponent implements OnInit {
     this.salesServices.addSales(sale).subscribe((res) => {
       const valor: any = res;
 
+
+
       if (res.id > 0) {
-        this.ref.close(sale);
+        this.ref.close(res);
       } else {
         this.mess.add({
           severity: 'error',

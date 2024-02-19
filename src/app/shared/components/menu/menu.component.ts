@@ -60,6 +60,24 @@ export class MenuComponent implements OnInit {
           },
         ],
       },
+      {
+        label: 'Reportes',
+        icon: 'pi pi-fw pi-file-pdf',
+        items: [
+          {
+            label: 'Ventas por Rango de Fechas',
+            icon: 'pi pi-cart-plus',
+          },
+          {
+            label: 'Facturacion por Rango de Fechas',
+            icon: 'pi pi-credit-card',
+          },
+          {
+            label: 'Listado Cliente',
+            icon: 'pi pi-fw pi-user-plus',
+          },
+        ]
+      }
     ];
   }
 

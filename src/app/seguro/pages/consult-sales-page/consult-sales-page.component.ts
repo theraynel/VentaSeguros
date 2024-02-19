@@ -21,7 +21,7 @@ export class ConsultSalesPageComponent implements OnInit {
 
   public common = new segurosCommon();
 
- public sales: InsuranceSale = {
+  public sales: InsuranceSale = {
     id: 0,
     idCliente: 0,
     fechaVenta: new Date(),
@@ -32,26 +32,26 @@ export class ConsultSalesPageComponent implements OnInit {
     idPlan: 0,
     idTipoCuenta: 0,
     estado: true
-}
+  }
   constructor(
-       private mess: MessageService,
-       public saleService: SaleService,
-       private confirmationService: ConfirmationService,
-       public dialogService: DialogService
-  ){}
+    private mess: MessageService,
+    public saleService: SaleService,
+    private confirmationService: ConfirmationService,
+    public dialogService: DialogService
+  ) { }
 
   ngOnInit() {
     this.getSales();
   }
 
   getSales() {
-     this.saleService.getSales().subscribe( (res: any) => {
+    this.saleService.getSales().subscribe((res: any) => {
       console.log(res);
 
-        this.saleslts = res
-     });
+      this.saleslts = res
+    });
 
-     console.log(this.saleslts);
+    console.log(this.saleslts);
 
   }
 
@@ -88,7 +88,7 @@ export class ConsultSalesPageComponent implements OnInit {
       montocuota: sale.montocuota,
       noProducto: sale.noProducto,
       noSeguro: sale.noSeguro,
-      estado : sale.estado
+      estado: sale.estado
     };
 
     this.ref = this.dialogService.open(InsuranceSaleComponent, {

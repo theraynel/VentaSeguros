@@ -4,6 +4,7 @@ export interface Clients
     nombre: string,
     apellido: string,
     cedula: string,
+    email: string,
     fechaNacimiento: Date,
     sexo?: string,
     nombreCompleto?: string

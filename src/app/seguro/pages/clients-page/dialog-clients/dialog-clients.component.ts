@@ -17,6 +17,7 @@ export class DialogClientsComponent implements OnInit {
   public nombre: string = '';
   public apellido: string = '';
   public cedula: string = '';
+  public email: string = '';
   public id: number = 0;
   public sexo: string = '';
   public fechaNacimiento: Date;
@@ -30,6 +31,7 @@ export class DialogClientsComponent implements OnInit {
     apellidoClient: ['', Validators.required],
     sexoClient: ['', Validators.required],
     cedulaClient: ['', Validators.required],
+    emailClient: ['', Validators.required],
     fechaNacimientoClient: ['', Validators.required],
   });
 
@@ -43,6 +45,7 @@ export class DialogClientsComponent implements OnInit {
     this.nombre = this.config.data.nombre;
     this.apellido = this.config.data.apellido;
     this.cedula = this.config.data.cedula;
+    this.email = this.config.data.email;
     this.sexo = this.config.data.sexo;
     this.id = this.config.data.id;
     this.fechaNacimiento = new Date(this.config.data.fechaNacimiento);
@@ -59,6 +62,7 @@ export class DialogClientsComponent implements OnInit {
       nombre: this.nombre,
       apellido: this.apellido,
       cedula: this.cedula,
+      email: this.email,
       fechaNacimiento: new Date(this.fechaNacimiento),
       sexo: this.sexo,
     };
@@ -92,6 +96,7 @@ console.log("lo que se envia ",client);
         nombre: this.nombre,
         apellido: this.apellido,
         cedula: this.cedula,
+        email: this.email,
         fechaNacimiento: new Date(this.fechaNacimiento),
         sexo: this.sexo,
       };

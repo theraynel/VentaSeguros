@@ -23,6 +23,7 @@ export class ClientsPageComponent implements OnInit {
     nombre: '',
     apellido: '',
     cedula: '',
+    email: '',
     fechaNacimiento: new Date(),
     sexo: '',
   };

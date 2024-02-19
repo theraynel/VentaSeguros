@@ -57,6 +57,27 @@
           ></p-inputMask>
         </div>
 
+        <div class="flex flex-column my-3">
+          <label htmlFor="name">Email</label>
+          <input
+            type="text"
+            pInputText
+            id="lastName"
+            [(ngModel)]="email"
+            placeholder="Email"
+            formControlName="emailClient"
+          />
+
+          <small
+            class="p-error block"
+            *ngIf="
+              clientForm.get('apellidoClient')?.invalid &&
+              clientForm.get('apellidoClient')?.dirty
+            "
+            >El apellido es requerido</small
+          >
+        </div>
+
         <div class="flex flex-column my-3 flex-auto">
           <label htmlFor="sexo">Sexo</label>
           <p-dropdown
