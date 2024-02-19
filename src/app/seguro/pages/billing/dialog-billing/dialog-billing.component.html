@@ -1,1 +1,140 @@
-<p>dialog-billing works!</p>
+<div class="row flex-auto">
+  <p-toast></p-toast>
+  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+
+  <p-panel header="Elegir Informacion">
+    <div class="flex flex-column flex-auto">
+      <label htmlFor="cliente">Cliente - Plan </label>
+      <p-dropdown
+        [options]="saleslts"
+        [(ngModel)]="clienteId"
+        optionLabel="clientePlan"
+        [filter]="true"
+        filterBy="clientePlan"
+        optionValue="idVenta"
+        [showClear]="true"
+        placeholder="Selecciona un Cliente - Plan"
+        styleClass="w-full"
+        (onChange)="cambioDiv($event.value)"
+        appendTo="body"
+      >
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+          <div class="flex align-items-center gap-2">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+              [class]="'flag flag-' + selectedOption.clientePlan.toLowerCase()"
+              style="width: 18px"
+            />
+            <div>{{ selectedOption.clientePlan }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-country pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+              [class]="'flag flag-' + country.clientePlan.toLowerCase()"
+              style="width: 18px"
+            />
+            <div>{{ country.clientePlan }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+  </p-panel>
+
+  <br />
+
+  <div *ngIf="mostrarDiv">
+    <p-panel header="Información General">
+      <div class="factura-row">
+        <div class="factura-column">
+          <strong> Cliente: </strong>
+          {{ dataFact[0].cliente }}
+        </div>
+
+        <div class="factura-column">
+          <strong>Codigo Plan: </strong>
+          {{ dataFact[0].codPlan }}
+        </div>
+      </div>
+
+      <div class="factura-row">
+        <div class="factura-column">
+          <strong>Número de Producto: </strong>
+          {{ dataFact[0].noProducto }}
+        </div>
+
+        <div class="factura-column">
+          <strong>Tipo de Seguro: </strong>
+          {{ dataFact[0].nombreTiposeguro }}
+        </div>
+      </div>
+
+      <div class="factura-row">
+        <div class="factura-column">
+          <strong>Tipo Cuenta: </strong>
+          {{ dataFact[0].nombreTipoCuenta }}
+        </div>
+
+        <div class="factura-column">
+          <strong>Número de Seguro: </strong>
+          {{ dataFact[0].noSeguro }}
+        </div>
+      </div>
+    </p-panel>
+    <br />
+
+    <p-table
+      [value]="dataFact"
+      styleClass="p-datatable-gridlines"
+      [tableStyle]="{ 'min-width': '55rem' }"
+    >
+      <ng-template pTemplate="caption"> Detalle </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Plan</th>
+          <th>Cantida</th>
+          <th>Precio Unitario</th>
+          <th>Total</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.nombrePlan }}</td>
+          <td>{{ 1 }}</td>
+          <td>{{ product.montocuota | currency }}</td>
+          <td>{{ product.montocuota | currency }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div class="card">
+      <ng-template pTemplate="right">
+        <button
+          pButton
+          pRipple
+          title="Nuevo"
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-primary mr-2"
+        ></button>
+      </ng-template>
+    </div>
+
+    <br />
+
+    <p-toolbar styleClass="mb-4 flex justify-content-end">
+      <ng-template pTemplate="right">
+        <button
+          pButton
+          pRipple
+          title="Nuevo"
+          label="Facturar"
+          icon="pi pi-save"
+          class="p-button-primary mr-2"
+          (click)="facturar()"
+        ></button>
+      </ng-template>
+    </p-toolbar>
+  </div>
+</div>

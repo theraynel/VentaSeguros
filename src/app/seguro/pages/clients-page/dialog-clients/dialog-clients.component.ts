@@ -62,6 +62,8 @@ export class DialogClientsComponent implements OnInit {
       fechaNacimiento: new Date(this.fechaNacimiento),
       sexo: this.sexo,
     };
+console.log("lo que se envia ",client);
+
 
     this.clientServices.addClient(client).subscribe((res) => {
       const valor: any = res;
@@ -70,6 +72,8 @@ export class DialogClientsComponent implements OnInit {
         this.ref.close(res);
       } else {
         console.log('Entro 1');
+
+        console.log('Entro 1',{ res, valor});
 
         this.mess.add({
           severity: 'error',

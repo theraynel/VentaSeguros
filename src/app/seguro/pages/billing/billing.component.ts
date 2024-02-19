@@ -21,8 +21,9 @@ export class BillingComponent {
   public common = new segurosCommon();
 
   constructor(
-         private clientService: BillingService,
-         public dialogService: DialogService
+         private billingService: BillingService,
+         public dialogService: DialogService,
+         private mess: MessageService,
 ) {}
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class BillingComponent {
   }
 
   getBillings() {
-    this.clientService.getBillings().subscribe((res: any) => {
+    this.billingService.getBillings().subscribe((res: any) => {
       console.log('res', res);
 
       this.billinglts = res;
@@ -71,21 +72,6 @@ export class BillingComponent {
       header: 'Detalle de Factura',
       data: det,
     });
-
-    // this.ref.onClose.subscribe((sale) => {
-    //   this.getSales();
-
-    //   console.log(sale);
-    //   if (sale !== undefined) {
-    //     if (sale.id > 0) {
-    //       this.mess.add({
-    //         severity: 'success',
-    //         summary: 'Venta Seguro Creado',
-    //         detail: `Venta Seguro creado con Exito!`,
-    //       });
-    //     }
-    //   }
-    // });
   }
   imprimir(imp: Billing){
 
@@ -94,6 +80,21 @@ export class BillingComponent {
     this.ref = this.dialogService.open(DialogBillingComponent, {
       header: 'Agregar Factura',
       data: null,
+    });
+
+    this.ref.onClose.subscribe((client) => {
+      this.getBillings();
+
+      console.log(client);
+      if (client !== undefined) {
+        if (client.id > 0) {
+          this.mess.add({
+            severity: 'success',
+            summary: 'Creacion de Factura',
+            detail: `Factura creada con Exito!`,
+          });
+        }
+      }
     });
   }
 }

@@ -38,7 +38,8 @@
     </div>
 
     <div class="factura-column">
-      <strong>Fecha Factura: </strong> {{ billingInfo.fechaFactura | date:'dd/MM/yyyy hh:mm'}}
+      <strong>Fecha Factura: </strong>
+      {{ billingInfo.fechaFactura | date : "dd/MM/yyyy hh:mm" }}
     </div>
   </div>
 </p-panel>
@@ -69,14 +70,34 @@
 </p-table>
 
 <div class="card">
-<ng-template pTemplate="right">
-  <button
-    pButton
-    pRipple
-    title="Nuevo"
-    label="New"
-    icon="pi pi-plus"
-    class="p-button-primary mr-2"
-  ></button>
-</ng-template>
+  <ng-template pTemplate="right">
+    <button
+      pButton
+      pRipple
+      title="Nuevo"
+      label="New"
+      icon="pi pi-plus"
+      class="p-button-primary mr-2"
+    ></button>
+  </ng-template>
 </div>
+
+<br />
+
+<p-panel header="Totales">
+  <div class="factura-row">
+    <div class="factura-column">
+      <strong> Sub Total: </strong>
+      {{ billingDetailInfo[0].montoCuota | currency }}
+    </div>
+  </div>
+
+  <div class="factura-row">
+    <div class="factura-column"><strong>ITBIS: </strong> {{ 0 | currency }}</div>
+  </div>
+
+  <div class="factura-column">
+    <strong> Total Neto: </strong>
+    {{ billingDetailInfo[0].montoCuota | currency }}
+  </div>
+</p-panel>

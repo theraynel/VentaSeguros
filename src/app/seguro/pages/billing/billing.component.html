@@ -1,5 +1,5 @@
 <div class="card">
-  <!-- <p-toast></p-toast> -->
+  <p-toast></p-toast>
   <p-toolbar styleClass="mb-4 flex justify-content-end">
     <ng-template pTemplate="right">
       <button
@@ -53,9 +53,7 @@
         <th pSortableColumn="noFactura">
           No. Factura <p-sortIcon field="noFactura"></p-sortIcon>
         </th>
-        <th pSortableColumn="mes">
-          Mes<p-sortIcon field="mes"></p-sortIcon>
-        </th>
+        <th pSortableColumn="mes">Mes<p-sortIcon field="mes"></p-sortIcon></th>
         <th pSortableColumn="anio">
           Anio<p-sortIcon field="anio"></p-sortIcon>
         </th>
@@ -68,14 +66,14 @@
         <th>Opciones</th>
       </tr>
     </ng-template>
-     <ng-template pTemplate="body" let-client>
+    <ng-template pTemplate="body" let-client>
       <tr>
         <td>{{ client.cliente }}</td>
         <td>{{ client.detalle[0].plan }}</td>
         <td>{{ client.id }}</td>
-        <td>{{ client.mes  }}</td>
-        <td>{{ client.anio  }}</td>
-        <td>{{ client.montoFactura | currency  }}</td>
+        <td>{{ client.mes }}</td>
+        <td>{{ client.anio }}</td>
+        <td>{{ client.montoFactura | currency }}</td>
         <td>
           <p-button
             [label]="common.getStatus(client.estado)"
@@ -84,7 +82,7 @@
             title="CancelaR"
           ></p-button>
         </td>
-        <td class="flex " style="font-size: 8x">
+        <td class="flex" style="font-size: 8x">
           <button
             title="Detalle"
             pButton
