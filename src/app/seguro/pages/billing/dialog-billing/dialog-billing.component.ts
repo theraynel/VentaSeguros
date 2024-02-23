@@ -69,7 +69,6 @@ export class DialogBillingComponent {
 
   getSales() {
     this.saleService.getSales().subscribe((res: any) => {
-      console.log('llego', res);
 
       this.saleslts = res;
 

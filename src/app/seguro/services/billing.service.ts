@@ -36,4 +36,19 @@ export class BillingService {
       })
     );
   }
+
+  editBilling(id: number, sale: Billing): Observable<Billing> {
+    const urls = `${this.url}/${id}`;
+
+    console.log(urls);
+
+    console.log("sale", sale);
+
+
+    return this.http.put<Billing>(urls, sale, httpOption).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return of(error.error);
+      })
+    );
+  }
 }

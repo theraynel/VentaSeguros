@@ -21,10 +21,11 @@ export class BillingComponent {
   public common = new segurosCommon();
 
   constructor(
-         private billingService: BillingService,
-         public dialogService: DialogService,
-         private mess: MessageService,
-) {}
+    private billingService: BillingService,
+    public dialogService: DialogService,
+    private mess: MessageService,
+    private confirmDialogService: ConfirmationService
+  ) { }
 
   ngOnInit() {
     this.getBillings();
@@ -32,51 +33,67 @@ export class BillingComponent {
 
   getBillings() {
     this.billingService.getBillings().subscribe((res: any) => {
-      console.log('res', res);
 
       this.billinglts = res;
+
+      this.billinglts = this.billinglts.filter((x) => x.estado === true);
+
     });
   }
 
   updateStatus(sale: Billing) {
 
-    console.log("Esta entrando por aqui");
+    this.confirmDialogService.confirm({
+      message: 'Seguro que deseas cancelar esta Factura?',
+      header: 'Cancelation Confirmation',
+      icon: 'pi pi-trash',
+      accept: () => {
 
-    // if (sale.estado == true) sale.estado = false;
-    // else sale.estado = true;
+        if (sale.estado == true) sale.estado = false;
+        else sale.estado = true;
 
-    // const saleInfo: InsuranceSale = {
-    //   id: sale.idVenta,
-    //   idCliente: sale.idCliente,
-    //   idPlan: sale.idPlan,
-    //   idTipoCuenta: sale.idTipoCuenta,
-    //   idTiposeguro: sale.idTiposeguro,
-    //   fechaVenta: sale.fechaVenta,
-    //   montocuota: sale.montocuota,
-    //   noProducto: sale.noProducto,
-    //   noSeguro: sale.noSeguro,
-    //   estado: sale.estado
-    // };
+        const saleInfo: Billing = {
+          id: sale.id,
+          idCliente: sale.idCliente,
+          idVenta: sale.idVenta,
+          anio: sale.anio,
+          mes: sale.mes,
+          fechaFactura: sale.fechaFactura,
+          montoFactura: sale.montoFactura,
+          estado: sale.estado,
+          detalle: []
+        };
 
-    // this.saleService
-    //   .editSales(saleInfo.id, saleInfo)
-    //   .subscribe((res) => {
-    //     if (res === null) {
-    //       this.getSales();
-    //     }
-    //   });
+        console.log("SaleInfo", saleInfo);
+
+
+        this.billingService
+          .editBilling(saleInfo.id, saleInfo)
+          .subscribe((res) => {
+            if (res === null) {
+              this.getBillings();
+              this.mess.add({
+                severity: 'success',
+                summary: 'Cancelación de Factura',
+                detail: `Factura cancelada con Exito!`,
+              });
+            }
+          });
+      },
+      reject: () => { },
+    });
   }
 
-  detalle(det: Billing){
+  detalle(det: Billing) {
     this.ref = this.dialogService.open(BillingDetailsComponent, {
       header: 'Detalle de Factura',
       data: det,
     });
   }
-  imprimir(imp: Billing){
+  imprimir(imp: Billing) {
 
   }
-  openNew(){
+  openNew() {
     this.ref = this.dialogService.open(DialogBillingComponent, {
       header: 'Agregar Factura',
       data: null,

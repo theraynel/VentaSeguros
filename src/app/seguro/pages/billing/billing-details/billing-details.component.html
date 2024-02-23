@@ -77,7 +77,7 @@
       title="Nuevo"
       label="New"
       icon="pi pi-plus"
-      class="p-button-primary mr-2"
+      class="p-button-primary"
     ></button>
   </ng-template>
 </div>
@@ -102,4 +102,17 @@
     <strong> Total Neto: </strong>
     {{ billingDetailInfo[0].montoCuota | currency }}
   </div>
+
+    <div class=" flex justify-content-end">
+    <button
+      pButton
+      pRipple
+      title="Re-Imprimir"
+      icon="pi pi-file-pdf"
+      class="p-button-rounded p-button-primary bg-0"
+      (click)="imprimir()"
+    ></button>
+  </div>
 </p-panel>
+
+

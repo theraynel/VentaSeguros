@@ -5,7 +5,7 @@ export interface Billing
    id: number,
    idVenta: number,
    idCliente: number,
-   cliente: string,
+   cliente?: string,
    anio: number
    mes: number,
    montoFactura: number,

@@ -185,8 +185,6 @@ export class InsuranceSaleComponent implements OnInit {
     this.salesServices.addSales(sale).subscribe((res) => {
       const valor: any = res;
 
-
-
       if (res.id > 0) {
         this.ref.close(res);
       } else {
