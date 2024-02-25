@@ -3,17 +3,15 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { BillingDetail } from 'src/app/seguro/interfaces/billingDetails';
 import { Billing } from 'src/app/seguro/interfaces/billings';
 
-import  {jsPDF} from 'jspdf';
+import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
 @Component({
   selector: 'app-billing-details',
   templateUrl: './billing-details.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class BillingDetailsComponent {
-
   public billingInfo: Billing;
   public billingDetailInfo: BillingDetail[] = [];
 
@@ -24,11 +22,7 @@ export class BillingDetailsComponent {
   public numSeguro: string = '';
   public fechaFactura: Date;
 
-
-
-  constructor(
-    private config: DynamicDialogConfig,
-  ){
+  constructor(private config: DynamicDialogConfig) {
     this.codFactura = this.config.data.nombre;
     this.cliente = this.config.data.apellido;
     this.numProduct = this.config.data.cedula;
@@ -39,60 +33,52 @@ export class BillingDetailsComponent {
     this.billingInfo = this.config.data;
 
     this.billingDetailInfo = this.billingInfo.detalle;
-
-
   }
 
-  imprimir(){
-
+  imprimir() {
     const doc = new jsPDF();
-        // Datos de la factura
-        const factura = {
-          numero: '001',
-          fecha: '2024-02-23',
-          cliente: 'Cliente Ejemplo',
-          direccion: 'Calle Ejemplo, Ciudad Ejemplo',
-          telefono: '123456789'
-        };
 
+    let startY = 0;
 
-        let startY = 0;
+    // Configuración de la tabla de detalle
+    const columns = ['Nombre', 'Cantidad', 'Precio Unitario', 'Total'];
+    const rows = this.billingDetailInfo.map((item) => [
+      item.plan,
+      1,
+      '$' + item.montoCuota.toFixed(2),
+      '$' + item.montoCuota.toFixed(2),
+    ]);
 
-        // Detalle de la factura
-        const detalle = [
-          { descripcion: 'Producto 1', cantidad: 2, precio_unitario: 10, total: 20 },
-          { descripcion: 'Producto 2', cantidad: 1, precio_unitario: 15, total: 15 },
-          { descripcion: 'Producto 3', cantidad: 3, precio_unitario: 8, total: 24 }
-        ];
+    // Agregar otros datos de la factura
+    doc.setFontSize(22);
+    doc.setFont("times");
 
-        // Configuración de la tabla de detalle
-        const columns = ['Descripción', 'Cantidad', 'Precio Unitario', 'Total'];
-        const rows = detalle.map(item => [item.descripcion, item.cantidad, item.precio_unitario, item.total]);
+    doc.text(`Factura`, 14, startY + 35,);
+    doc.setFontSize(13)
+    doc.text(`Codigo Factura: ${this.billingInfo.id}`, 14, startY + 50);
+    doc.text(`Cliente: ${this.billingInfo.cliente}`, 14, startY + 55);
+    doc.text(`Número de Producto: ${this.billingDetailInfo[0].noProducto}`, 14, startY + 60);
+    doc.text(`Tipo de Seguro: ${this.billingDetailInfo[0].tipoSeguro}`, 14, startY + 65);
+    doc.text(`Número de Seguro: ${this.billingDetailInfo[0].noSeguro}`, 14, startY + 70);
+    doc.text(`Fecha Factura: ${new Date(this.billingInfo.fechaFactura).toLocaleString()}`, 14, startY + 75);
 
-                // Agregar otros datos de la factura
-                doc.text(`Factura #${factura.numero}`, 14, startY + 10);
-                doc.text(`Fecha: ${factura.fecha}`, 14, startY + 20);
-                doc.text(`Cliente: ${factura.cliente}`, 14, startY + 30);
-                doc.text(`Dirección: ${factura.direccion}`, 14, startY + 40);
-                doc.text(`Teléfono: ${factura.telefono}`, 14, startY + 50);
+    // Agregar tabla de detalle al PDF
+    (doc as any).autoTable({
+      startY: 90,
+      head: [columns],
+      body: rows,
+    });
 
-        // Agregar tabla de detalle al PDF
-        (doc as any).autoTable({
-          head: [columns],
-          body: rows
-        });
+    // Calcular total
+    const total = this.billingDetailInfo.reduce((acc, item) => acc + item.montoCuota, 0);
 
-        // Calcular total
-        const total = detalle.reduce((acc, item) => acc + item.total, 0);
+    // Agregar sección de totales
+    startY = (doc as any).autoTable.previous.finalY + 20;
+    doc.text('Subtotal: $' + total, 14, startY);
+    doc.text('Impuestos: $' + 0.00, 14, startY + 5);
+    doc.text('Total: $' + total, 14, startY + 10);
 
-        // Agregar sección de totales
-         startY = (doc as any).autoTable.previous.finalY + 10;
-        doc.text('Total: $' + total, 14, startY);
-
-
-
-        // Guardar el PDF
-        doc.save('factura.pdf');
-      }
-
+    // Guardar el PDF
+    doc.save('factura.pdf');
+  }
 }
