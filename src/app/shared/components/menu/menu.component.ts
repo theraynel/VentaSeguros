@@ -19,6 +19,22 @@ export class MenuComponent implements OnInit {
         routerLink: 'dashboard'
       },
       {
+        label: 'Consultas',
+        icon: 'pi pi-fw pi-file-pdf',
+        items: [
+          {
+            label: 'Ventas por Rango de Fechas',
+            icon: 'pi pi-cart-plus',
+            routerLink: 'consultSales'
+          },
+          {
+            label: 'Facturacion por Rango de Fechas',
+            icon: 'pi pi-credit-card',
+            routerLink: 'consultBilling'
+          }
+        ]
+      },
+      {
         label: 'Administacion',
         icon: 'pi pi-fw pi-server',
         items: [
@@ -51,7 +67,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Venta Seguro',
             icon: 'pi pi-cart-plus',
-            routerLink: 'consultSale'
+            routerLink: 'sales'
           },
           {
              label: 'Facturacion',
@@ -60,24 +76,7 @@ export class MenuComponent implements OnInit {
           },
         ],
       },
-      {
-        label: 'Reportes',
-        icon: 'pi pi-fw pi-file-pdf',
-        items: [
-          {
-            label: 'Ventas por Rango de Fechas',
-            icon: 'pi pi-cart-plus',
-          },
-          {
-            label: 'Facturacion por Rango de Fechas',
-            icon: 'pi pi-credit-card',
-          },
-          {
-            label: 'Listado Cliente',
-            icon: 'pi pi-fw pi-user-plus',
-          },
-        ]
-      }
+
     ];
   }
 

@@ -18,6 +18,8 @@ import { DialogClientsComponent } from './pages/clients-page/dialog-clients/dial
 import { BillingComponent } from './pages/billing/billing.component';
 import { BillingDetailsComponent } from './pages/billing/billing-details/billing-details.component';
 import { DialogBillingComponent } from './pages/billing/dialog-billing/dialog-billing.component';
+import { ConsultBillingComponent } from './pages/all-consult/consult-billing/consult-billing.component';
+import { ConsultSalesComponent } from './pages/all-consult/consult-sales/consult-sales.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { DialogBillingComponent } from './pages/billing/dialog-billing/dialog-bi
     DialogClientsComponent,
     BillingComponent,
     BillingDetailsComponent,
-    DialogBillingComponent
+    DialogBillingComponent,
+    ConsultBillingComponent,
+    ConsultSalesComponent
   ],
   imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule, ReactiveFormsModule],
 })

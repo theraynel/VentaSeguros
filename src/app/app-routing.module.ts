@@ -1,3 +1,4 @@
+import { ConsultBillingComponent } from './seguro/pages/all-consult/consult-billing/consult-billing.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,6 +9,7 @@ import { InsuranceTypesPageComponent } from './seguro/pages/insurance-types-page
 import { PlansPageComponent } from './seguro/pages/plans-page/plans-page.component';
 import { DashboardComponent } from './seguro/pages/dashboard/dashboard.component';
 import { BillingComponent } from './seguro/pages/billing/billing.component';
+import { ConsultSalesComponent } from './seguro/pages/all-consult/consult-sales/consult-sales.component';
 
 const routes: Routes = [
   {
@@ -15,8 +17,12 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'consultSale',
+    path: 'sales',
     component: ConsultSalesPageComponent
+  },
+  {
+    path: 'consultSales',
+    component: ConsultSalesComponent
   },
   {
     path: 'clients',
@@ -25,6 +31,10 @@ const routes: Routes = [
   {
      path: 'billing',
      component: BillingComponent
+  },
+  {
+     path: 'consultBilling',
+     component: ConsultBillingComponent
   },
   {
     path: 'plans',
