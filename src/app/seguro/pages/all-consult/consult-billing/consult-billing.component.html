@@ -5,7 +5,8 @@
       <div class="factura-column">
         <strong>Cliente </strong>
         <p-dropdown
-          [disabled]="true"
+          [options]="clients"
+          [(ngModel)]="clienteId"
           placeholder="Selecciona un Cliente"
           optionLabel="nombreCompleto"
           optionValue="id"
@@ -18,6 +19,7 @@
         <p-calendar
           [showIcon]="true"
           appendTo="body"
+          [(ngModel)]="fechaDesde"
           [required]="true"
         ></p-calendar>
       </div>
@@ -27,6 +29,7 @@
         <p-calendar
           [showIcon]="true"
           appendTo="body"
+          [(ngModel)]="fechaHasta"
           [required]="true"
         ></p-calendar>
       </div>
@@ -38,6 +41,7 @@
           label="Buscar"
           icon="pi pi-search"
           class="p-button-primary"
+          (click)="search()"
         ></button>
       </div>
     </div>
@@ -117,6 +121,7 @@
             pRipple
             icon="pi pi-eye"
             class="p-button-rounded p-button-primary mr-2"
+            (click)="detalle(client)"
           ></button>
         </td>
       </tr>

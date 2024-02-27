@@ -90,9 +90,7 @@ export class BillingComponent {
       data: det,
     });
   }
-  imprimir(imp: Billing) {
 
-  }
   openNew() {
     this.ref = this.dialogService.open(DialogBillingComponent, {
       header: 'Agregar Factura',
