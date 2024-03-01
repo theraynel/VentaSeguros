@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
 
   products!: Product[];
 
-  montosPorMes: any = {};
+ public montosPorMes: any = {};
 
   data: any;
 
@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit {
 
   procesarMontosPorMes(facturas: Billing[]): void {
 
-    console.log("factyra", facturas);
+    console.log("factyrasssssss", facturas);
 
     facturas.forEach(factura => {
       const mes = factura.mes;
@@ -116,7 +116,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-    console.log("montosPorMes", this.montosPorMes[0]);
+    console.log("montosPorMes", this.montosPorMes);
     });
   }
 
@@ -133,7 +133,7 @@ export class DashboardComponent implements OnInit {
       datasets: [
         {
           type: 'bar',
-          label: 'Facturacion',
+          label: 'Ventas en Monto',
           backgroundColor: documentStyle.getPropertyValue('--green-500'),
           data: [21, 84, 24, 75, 37, 65, 34],
           borderColor: 'white',
@@ -141,11 +141,11 @@ export class DashboardComponent implements OnInit {
         },
         {
           type: 'bar',
-          label: 'Ventas',
+          label: 'Ventas en Cantidad',
           backgroundColor: documentStyle.getPropertyValue('--orange-500'),
           data: [41, 52, 24, 74, 23, 21, 32],
-          borderColor: 'white',
-          borderWidth: 2,
+        //   borderColor: 'white',
+        //   borderWidth: 2,
         },
       ],
     };
