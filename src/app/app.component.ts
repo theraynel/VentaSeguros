@@ -13,6 +13,11 @@ export class AppComponent {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+    this.isLoggedIn();
+  }
 
+
+  isLoggedIn(): boolean {
+    return false; //this.authService.isLoggedIn(); // Método en tu servicio de autenticación para verificar si el usuario está autenticado
   }
 }

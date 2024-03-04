@@ -20,6 +20,7 @@ import { BillingDetailsComponent } from './pages/billing/billing-details/billing
 import { DialogBillingComponent } from './pages/billing/dialog-billing/dialog-billing.component';
 import { ConsultBillingComponent } from './pages/all-consult/consult-billing/consult-billing.component';
 import { ConsultSalesComponent } from './pages/all-consult/consult-sales/consult-sales.component';
+import { SeguroRoutingModule } from './seguro-routing.module';
 
 
 @NgModule({
@@ -41,6 +42,6 @@ import { ConsultSalesComponent } from './pages/all-consult/consult-sales/consult
     ConsultBillingComponent,
     ConsultSalesComponent
   ],
-  imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, PrimeNgModule, HttpClientModule, FormsModule, ReactiveFormsModule, SeguroRoutingModule],
 })
 export class SeguroModule {}

@@ -9,14 +9,14 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuComponent implements OnInit {
 
-  items: MenuItem[] = [];
+  items: any[] = [];
 
   ngOnInit() {
     this.items = [
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-home',
-        routerLink: 'dashboard'
+        routerLink: 'seguro/dashboard'
       },
       {
         label: 'Consultas',
@@ -25,12 +25,12 @@ export class MenuComponent implements OnInit {
           {
             label: 'Ventas por Rango de Fechas',
             icon: 'pi pi-cart-plus',
-            routerLink: 'consultSales'
+            routerLink: 'seguro/consultSales'
           },
           {
             label: 'Facturacion por Rango de Fechas',
             icon: 'pi pi-credit-card',
-            routerLink: 'consultBilling'
+            routerLink: 'seguro/consultBilling'
           }
         ]
       },
@@ -41,17 +41,17 @@ export class MenuComponent implements OnInit {
           {
             label: 'Planes',
             icon: 'pi pi-fw pi-briefcase',
-            routerLink: 'plans'
+            routerLink: 'seguro/plans'
           },
           {
             label: 'Tipo Cuentas',
             icon: 'pi pi-fw pi-money-bill',
-            routerLink: 'accountType'
+            routerLink: 'seguro/accountType'
           },
           {
             label: 'Tipo Seguro',
             icon: 'pi pi-fw pi-lock',
-            routerLink: 'insuranceTypes'
+            routerLink: 'seguro/insuranceTypes'
           },
         ],
       },
@@ -62,17 +62,17 @@ export class MenuComponent implements OnInit {
           {
             label: 'Cliente',
             icon: 'pi pi-fw pi-user-plus',
-            routerLink: 'clients'
+            routerLink: 'seguro/clients'
           },
           {
             label: 'Venta Seguro',
             icon: 'pi pi-cart-plus',
-            routerLink: 'sales'
+            routerLink: 'seguro/sales'
           },
           {
              label: 'Facturacion',
              icon: 'pi pi-credit-card',
-             routerLink: 'billing'
+             routerLink: 'seguro/billing'
           },
         ],
       },
