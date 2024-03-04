@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { UsersService } from './seguro/services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { PrimeNGConfig } from 'primeng/api';
 export class AppComponent {
   title = 'ventaSeguroApp';
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    private authService: UsersService
+    ) {}
 
   ngOnInit() {
     this.primengConfig.ripple = true;
@@ -18,6 +22,6 @@ export class AppComponent {
 
 
   isLoggedIn(): boolean {
-    return false; //this.authService.isLoggedIn(); // Método en tu servicio de autenticación para verificar si el usuario está autenticado
+    return this.authService.isLoggedIn; // Método en tu servicio de autenticación para verificar si el usuario está autenticado
   }
 }
