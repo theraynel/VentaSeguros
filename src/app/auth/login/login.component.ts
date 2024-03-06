@@ -1,42 +1,40 @@
 import { Component } from '@angular/core';
 import { UsersService } from 'src/app/seguro/services/users.service';
 import { LoginUsers } from '../../seguro/interfaces/loginUser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-
-  public userName: string = '';
+  public email: string = '';
   public passWord: string = '';
 
 
-  public respuesta: any = '';
+  constructor(private user: UsersService, private router: Router) {}
 
-  constructor(
-    private user: UsersService
-  ){}
-
-  login(){
-
+  login() {
     const data: LoginUsers = {
-       username: this.userName,
-       password: this.passWord
+      email: this.email,
+      password: this.passWord,
     };
 
     this.user.login(data).subscribe((res) => {
+      console.log('Respuesta', res);
 
-       if (res && res.text) {
-        this.respuesta = res.text;
-        sessionStorage.setItem('token', this.respuesta);
-         this.user.isLoggedIn = true;
+      if (res && res.token) {
+        sessionStorage.setItem('token', String(res.token));
+        this.user.isLoggedIn = true;
+
+        this.router.navigate(['/seguro']);
       } else {
         console.error(res);
       }
-
     });
-
   }
 
+  register() {
+    this.router.navigate(['register']);
+  }
 }

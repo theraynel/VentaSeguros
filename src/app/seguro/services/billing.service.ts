@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Billing } from '../interfaces/billings';
 import { ConsultSales } from '../interfaces/consultSales';
+import { environment } from 'environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ const httpOption = {
   providedIn: 'root',
 })
 export class BillingService {
-  url: string = 'https://localhost:44330/api/Facturacion';
+  url: string = `${environment.apiUrl}/Facturacion`;
 
   constructor(private http: HttpClient) {}
 
@@ -39,11 +40,7 @@ export class BillingService {
 
   editBilling(id: number, sale: Billing): Observable<Billing> {
     const urls = `${this.url}/${id}`;
-
-    console.log(urls);
-
-    console.log("sale", sale);
-
+    console.log('sale', sale);
 
     return this.http.put<Billing>(urls, sale, httpOption).pipe(
       catchError((error: HttpErrorResponse) => {

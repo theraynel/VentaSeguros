@@ -1,8 +1,14 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Users } from '../interfaces/users';
 import { Observable, catchError, of } from 'rxjs';
 import { LoginUsers } from '../interfaces/loginUser';
+import { LoginUsersDTO } from '../interfaces/loginUserDTO';
+import { environment } from 'environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -11,35 +17,32 @@ const httpOption = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-  url: string = 'https://localhost:44330/api/Users';
-  public isLoggedIn : boolean = false;
+  public isLoggedIn: boolean = false;
 
   constructor(private http: HttpClient) {}
 
   register(user: Users): Observable<Users> {
-    return this.http.post<Users>(this.url, user, httpOption).pipe(
+    const url: string = `${environment.apiUrl}${'/Users/registro'}`;
+
+    return this.http.post<Users>(url, user, httpOption).pipe(
       catchError((error: HttpErrorResponse) => {
         return of(error.error);
       })
     );
   }
 
-  login(login: LoginUsers): Observable<any>{
+  login(login: LoginUsers): Observable<LoginUsersDTO> {
+    const url: string = `${environment.apiUrl}${'/Users/login'}`;
 
-    const url1: string = `${this.url}${'/login'}`;
+    console.log('Data', login);
 
-    console.log("Data", login);
-
-    console.log("url",url1);
-
-    return this.http.post<LoginUsers>(url1, login, httpOption).pipe(
+    return this.http.post<LoginUsers>(url, login, httpOption).pipe(
       catchError((error: HttpErrorResponse) => {
-         return of(error.error);
+        return of(error.error);
       })
     );
   }
-
 }

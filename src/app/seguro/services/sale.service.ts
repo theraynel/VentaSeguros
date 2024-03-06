@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { InsuranceSale } from '../interfaces/insuranceSale';
 import { ConsultSales } from '../interfaces/consultSales';
+import { environment } from 'environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ const httpOption = {
   providedIn: 'root',
 })
 export class SaleService {
-  url: string = 'https://localhost:44330/api/VentaSeguro';
+  url: string = `${environment.apiUrl}/VentaSeguro`;
 
   constructor(private http: HttpClient) {}
 

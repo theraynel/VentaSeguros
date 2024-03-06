@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { InsuranceTypes } from '../interfaces/insuranceTypes';
+import { environment } from 'environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 export class InsuranceTypeService {
 
-  url: string = 'https://localhost:44330/api/TipoSeguro';
+  url: string = `${environment.apiUrl}/TipoSeguro`;
 
   constructor( private _http: HttpClient) { }
 

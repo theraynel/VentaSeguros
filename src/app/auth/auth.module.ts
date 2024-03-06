@@ -24,7 +24,8 @@ import { InputTextModule } from 'primeng/inputtext';
     PasswordModule
   ],
   exports: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ]
 })
 export class AuthModule { }

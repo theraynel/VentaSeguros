@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AccountTypes } from '../interfaces/accountTypes';
+import { environment } from 'environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -14,7 +15,7 @@ const httpOption = {
 })
 export class AccountTypeService {
 
-  url: string = 'https://localhost:44330/api/TipoCuenta';
+  url: string = `${environment.apiUrl}/TipoCuenta`;
 
   constructor( private _http: HttpClient) { }
 

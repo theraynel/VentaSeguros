@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Plans } from '../interfaces/plans';
+import { environment } from 'environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -14,7 +15,7 @@ const httpOption = {
 })
 export class PlansService {
 
-  url: string = 'https://localhost:44330/api/planes';
+  url: string = `${environment.apiUrl}/planes`;
 
   constructor( private _http : HttpClient ) { }
 
