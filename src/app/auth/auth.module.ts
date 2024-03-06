@@ -7,6 +7,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 
@@ -21,11 +22,10 @@ import { InputTextModule } from 'primeng/inputtext';
     CheckboxModule,
     InputTextModule,
     FormsModule,
-    PasswordModule
+    PasswordModule,
+    AuthRoutingModule
   ],
   exports: [
-    LoginComponent,
-    RegisterComponent
   ]
 })
 export class AuthModule { }

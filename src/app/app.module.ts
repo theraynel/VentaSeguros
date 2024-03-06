@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { SeguroModule } from './seguro/seguro.module';
 import { AuthModule } from './auth/auth.module';
 import { AppLayoutComponent } from './app.layout.component';
+import { UserLayoutComponent } from './user-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppLayoutComponent,
+    UserLayoutComponent
   ],
   imports: [
     BrowserModule,

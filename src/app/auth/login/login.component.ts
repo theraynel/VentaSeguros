@@ -35,6 +35,6 @@ export class LoginComponent {
   }
 
   register() {
-    this.router.navigate(['register']);
+    this.router.navigate(['auth/register']);
   }
 }
