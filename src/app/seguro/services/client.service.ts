@@ -17,7 +17,7 @@ const httpOption = {
 })
 export class ClientService {
 
-  url:string = `${environment}/Cliente`
+  url:string = `${environment.apiUrl}/Cliente`
 
   constructor( private http: HttpClient ) { }
 

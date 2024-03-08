@@ -11,7 +11,6 @@ export class LoginComponent {
   public email: string = '';
   public passWord: string = '';
 
-
   constructor(private user: UsersService, private router: Router) {}
 
   login() {
@@ -21,12 +20,11 @@ export class LoginComponent {
     };
 
     this.user.login(data).subscribe((res) => {
-      console.log('Respuesta', res);
-
       if (res && res.token) {
-        sessionStorage.setItem('token', String(res.token));
-        this.user.isLoggedIn = true;
-
+        sessionStorage.setItem(
+          'currentUser',
+          JSON.stringify({ name: res.nombres, token: res.token, id: res.id, lastname: res.apellidos })
+        );
         this.router.navigate(['/seguro']);
       } else {
         console.error(res);

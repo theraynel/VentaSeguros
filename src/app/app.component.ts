@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { UsersService } from './seguro/services/users.service';
+import { AuthService } from './seguro/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,8 @@ export class AppComponent {
 
   constructor(
     private primengConfig: PrimeNGConfig,
-    private authService: UsersService
+    private authService: AuthService,
+
     ) {}
 
   ngOnInit() {
@@ -22,6 +23,8 @@ export class AppComponent {
 
 
   isLoggedIn(): boolean {
-    return this.authService.isLoggedIn; // Método en tu servicio de autenticación para verificar si el usuario está autenticado
+    return this.authService.isLoggedIn(); // Método en tu servicio de autenticación para verificar si el usuario está autenticado
   }
+
+
 }

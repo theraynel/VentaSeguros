@@ -9,19 +9,20 @@ import { ConsultBillingComponent } from './pages/all-consult/consult-billing/con
 import { PlansPageComponent } from './pages/plans-page/plans-page.component';
 import { AccountTypesPageComponent } from './pages/account-types-page/account-types-page.component';
 import { InsuranceTypesPageComponent } from './pages/insurance-types-page/insurance-types-page.component';
+import { AuthGuard } from '../auth/guard';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', component: DashboardComponent },
-      { path: 'sales', component: ConsultSalesPageComponent, },
-      { path: 'consultSales', component: ConsultSalesComponent, },
-      { path: 'clients', component: ClientsPageComponent, },
-      { path: 'billing', component: BillingComponent, },
-      { path: 'consultBilling', component: ConsultBillingComponent, },
-      { path: 'plans', component: PlansPageComponent, },
-      { path: 'accountType', component: AccountTypesPageComponent, },
-      { path: 'insuranceTypes', component: InsuranceTypesPageComponent, },
+      { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'sales', component: ConsultSalesPageComponent, canActivate: [AuthGuard]},
+      { path: 'consultSales', component: ConsultSalesComponent, canActivate: [AuthGuard]},
+      { path: 'clients', component: ClientsPageComponent, canActivate: [AuthGuard]},
+      { path: 'billing', component: BillingComponent, canActivate: [AuthGuard]},
+      { path: 'consultBilling', component: ConsultBillingComponent, canActivate: [AuthGuard]},
+      { path: 'plans', component: PlansPageComponent, canActivate: [AuthGuard]},
+      { path: 'accountType', component: AccountTypesPageComponent, canActivate: [AuthGuard]},
+      { path: 'insuranceTypes', component: InsuranceTypesPageComponent, canActivate: [AuthGuard]},
       { path: 'dashboard', redirectTo: ''}
     ]),
   ],

@@ -5,10 +5,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Users } from '../interfaces/users';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { LoginUsers } from '../interfaces/loginUser';
 import { LoginUsersDTO } from '../interfaces/loginUserDTO';
 import { environment } from 'environment';
+import { RegisterDTO } from '../interfaces/registerDTO';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -20,14 +21,14 @@ const httpOption = {
   providedIn: 'root',
 })
 export class UsersService {
-  public isLoggedIn: boolean = false;
 
   constructor(private http: HttpClient) {}
 
-  register(user: Users): Observable<Users> {
+  register(user: Users): Observable<RegisterDTO> {
     const url: string = `${environment.apiUrl}${'/Users/registro'}`;
 
-    return this.http.post<Users>(url, user, httpOption).pipe(
+    return this.http.post<RegisterDTO>(url, user, httpOption).pipe(
+      map((sales) => sales),
       catchError((error: HttpErrorResponse) => {
         return of(error.error);
       })
@@ -36,9 +37,6 @@ export class UsersService {
 
   login(login: LoginUsers): Observable<LoginUsersDTO> {
     const url: string = `${environment.apiUrl}${'/Users/login'}`;
-
-    console.log('Data', login);
-
     return this.http.post<LoginUsers>(url, login, httpOption).pipe(
       catchError((error: HttpErrorResponse) => {
         return of(error.error);
