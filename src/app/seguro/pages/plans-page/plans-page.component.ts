@@ -68,7 +68,6 @@ export class PlansPageComponent implements OnInit {
     this.ref.onClose.subscribe((plan) => {
       this.getPlan();
 
-      console.log(plan);
       if (plan !== undefined) {
         this.mess.add({
           severity: 'success',
@@ -88,7 +87,6 @@ export class PlansPageComponent implements OnInit {
     this.ref.onClose.subscribe((plan) => {
       this.getPlan();
 
-      console.log(plan);
       if (plan !== undefined) {
         this.mess.add({
           severity: 'success',

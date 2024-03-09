@@ -3,26 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError as ObservableThrowError, of, catchError, map, throwError } from 'rxjs';
 import { Clients } from '../interfaces/clients';
 import { environment } from 'environment';
-// import { catchError } from 'rxjs/operators';
+import { BaseService } from 'src/app/shared/common/baseService';
 
-
-const httpOption = {
-  headers: new HttpHeaders({
-      'Contend-Type': 'aplication/json'
-  })
-};
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService {
+export class ClientService extends BaseService {
 
   url:string = `${environment.apiUrl}/Cliente`
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient) {
+    super();
+  }
 
   getClients(): Observable<Clients>{
-    return this.http.get<Clients>(this.url)
+    return this.http.get<Clients>(this.url, this.getHttpOptions())
                     .pipe(
                        map( clientes => clientes),
                        catchError( () => of())
@@ -30,7 +26,7 @@ export class ClientService {
   }
 
   addClient(client: Clients):Observable<Clients>{
-    return this.http.post<Clients>(this.url, client, httpOption)
+    return this.http.post<Clients>(this.url, client, this.getHttpOptions())
     .pipe(
       catchError((error: HttpErrorResponse) => {
          return of(error.error)
@@ -39,7 +35,7 @@ export class ClientService {
   }
 
   editClient(id: number, client: Clients):Observable<Clients>{
-    return this.http.put<Clients>(`${this.url}/${id}`, client, httpOption)
+    return this.http.put<Clients>(`${this.url}/${id}`, client, this.getHttpOptions())
     .pipe(
       catchError((error: HttpErrorResponse) =>{
         return of(error.error)
@@ -48,7 +44,7 @@ export class ClientService {
   }
 
   deleteClient(id: number): Observable<Clients>{
-    return this.http.delete<Clients>(`${this.url}/${id}`)
+    return this.http.delete<Clients>(`${this.url}/${id}`, this.getHttpOptions())
     .pipe(
       catchError((error: HttpErrorResponse) => {
         return of(error.error)

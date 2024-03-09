@@ -1,37 +1,54 @@
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, map, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AccountTypes } from '../interfaces/accountTypes';
 import { environment } from 'environment';
-
-const httpOption = {
-  headers: new HttpHeaders({
-      'Contend-Type': 'aplication/json'
-  })
-};
+import { BaseService } from 'src/app/shared/common/baseService';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AccountTypeService {
-
+export class AccountTypeService extends BaseService {
   url: string = `${environment.apiUrl}/TipoCuenta`;
 
-  constructor( private _http: HttpClient) { }
-
-  getAccountType(): Observable<AccountTypes>{
-    return this._http.get<AccountTypes>(this.url);
+  constructor(private _http: HttpClient) {
+    super();
   }
 
-  addAccountType(account: AccountTypes): Observable<AccountTypes>{
-     return this._http.post<AccountTypes>(this.url, account, httpOption);
+  getAccountType(): Observable<AccountTypes> {
+    return this._http.get<AccountTypes>(this.url, this.getHttpOptions()).pipe(
+      map((account) => account),
+      catchError(() => of())
+    );
   }
 
-  editAccountType(id: number, account: AccountTypes): Observable<AccountTypes>{
-    return this._http.put<AccountTypes>(`${this.url}/${id}`, account, httpOption);
+  addAccountType(account: AccountTypes): Observable<AccountTypes> {
+    return this._http
+      .post<AccountTypes>(this.url, account, this.getHttpOptions())
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return of(error.error);
+        })
+      );
   }
 
-  deleteAccountType(id: number):Observable<AccountTypes>{
-    return this._http.delete<AccountTypes>(`${this.url}/${id}`);
+  editAccountType(id: number, account: AccountTypes): Observable<AccountTypes> {
+    return this._http
+      .put<AccountTypes>(`${this.url}/${id}`, account, this.getHttpOptions())
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return of(error.error);
+        })
+      );
+  }
+
+  deleteAccountType(id: number): Observable<AccountTypes> {
+    return this._http
+      .delete<AccountTypes>(`${this.url}/${id}`, this.getHttpOptions())
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return of(error.error);
+        })
+      );
   }
 }

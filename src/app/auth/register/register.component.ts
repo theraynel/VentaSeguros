@@ -74,4 +74,8 @@ export class RegisterComponent {
       });
     }
   }
+
+  backLogin(){
+    this.router.navigate(['auth']);
+  }
 }
