@@ -2,16 +2,18 @@ import { Component } from '@angular/core';
 import { UsersService } from 'src/app/seguro/services/users.service';
 import { LoginUsers } from '../../seguro/interfaces/loginUser';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  providers: [MessageService]
 })
 export class LoginComponent {
   public email: string = '';
   public passWord: string = '';
 
-  constructor(private user: UsersService, private router: Router) {}
+  constructor(private user: UsersService, private router: Router, public mess: MessageService) { }
 
   login() {
     const data: LoginUsers = {
@@ -27,7 +29,12 @@ export class LoginComponent {
         );
         this.router.navigate(['/seguro']);
       } else {
-        console.error(res);
+        const valor: any = res;
+        this.mess.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: valor
+        })
       }
     });
   }

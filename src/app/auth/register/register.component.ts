@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { LoginUsers } from 'src/app/seguro/interfaces/loginUser';
 import { Users } from 'src/app/seguro/interfaces/users';
-import { AuthService } from 'src/app/seguro/services/auth.service';
 import { UsersService } from 'src/app/seguro/services/users.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
+  providers: [MessageService]
 })
 export class RegisterComponent {
   public firsName: string = '';
@@ -16,7 +17,7 @@ export class RegisterComponent {
   public passWord: string = '';
   public confirmPassWord: string = '';
 
-  constructor(private user: UsersService, private router: Router) {}
+  constructor(private user: UsersService, private router: Router, public mess: MessageService) {}
 
   register() {
     const data: Users = {
@@ -28,9 +29,15 @@ export class RegisterComponent {
     };
 
     if (this.passWord !== this.confirmPassWord) {
-      console.log('La password no son iguales ');
+      this.mess.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'La password no son iguales'
+      });
     } else {
       this.user.register(data).subscribe((res) => {
+        const dataRes: any = res;
+
         if (res.id > 0) {
           const data: LoginUsers = {
             email: this.email,
@@ -38,6 +45,7 @@ export class RegisterComponent {
           };
 
           this.user.login(data).subscribe((res) => {
+            const dataLogin: any = res;
             if (res && res.token) {
               sessionStorage.setItem(
                 'currentUser',
@@ -49,11 +57,19 @@ export class RegisterComponent {
               );
               this.router.navigate(['/seguro']);
             } else {
-              console.error(res);
+              this.mess.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: dataLogin
+              });
             }
           });
         } else {
-          console.error('fallo', res);
+          this.mess.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: dataRes
+          });
         }
       });
     }

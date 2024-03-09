@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthRoutingModule } from './auth-routing.module';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 
 
@@ -23,7 +24,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     InputTextModule,
     FormsModule,
     PasswordModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    PrimeNgModule
   ],
   exports: [
   ]
