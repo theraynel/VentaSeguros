@@ -56,7 +56,16 @@ export class segurosCommon {
         email: t.email,
         fechaNacimiento: t.fechaNacimiento,
         nombreCompleto: `${t.nombre} ${t.apellido}`,
+        user_id: t.user_id
       };
     });
+  }
+
+  getUserId(): number{
+    const currentUser = sessionStorage.getItem('currentUser');
+
+    const userId = currentUser?.length ? JSON.parse(currentUser).id : 0;
+
+    return Number(userId)
   }
 }

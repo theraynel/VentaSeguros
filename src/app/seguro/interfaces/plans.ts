@@ -5,5 +5,6 @@ export interface Plans
     nombre: string,
     cuota: number,
     edadMaxima: number,
-    estado: boolean
+    estado: boolean,
+    user_id: number
 }

@@ -26,6 +26,7 @@ export class ClientsPageComponent implements OnInit {
     email: '',
     fechaNacimiento: new Date(),
     sexo: '',
+    user_id: 0
   };
 
   public common = new segurosCommon();

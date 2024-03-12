@@ -11,8 +11,7 @@ import { segurosCommon } from 'src/app/shared/common/common';
   selector: 'app-consult-sales-page',
   templateUrl: './consult-sales-page.component.html',
   providers: [MessageService, ConfirmationService, DialogService],
-  styles: [
-  ]
+  styles: [],
 })
 export class ConsultSalesPageComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
@@ -31,14 +30,15 @@ export class ConsultSalesPageComponent implements OnInit {
     idTiposeguro: 0,
     idPlan: 0,
     idTipoCuenta: 0,
-    estado: true
-  }
+    estado: true,
+    user_id: 0
+  };
   constructor(
     private mess: MessageService,
     public saleService: SaleService,
     private confirmationService: ConfirmationService,
     public dialogService: DialogService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getSales();
@@ -46,13 +46,8 @@ export class ConsultSalesPageComponent implements OnInit {
 
   getSales() {
     this.saleService.getSales().subscribe((res: any) => {
-      console.log(res);
-
-      this.saleslts = res
+      this.saleslts = res;
     });
-
-    console.log(this.saleslts);
-
   }
 
   openNew() {
@@ -64,7 +59,6 @@ export class ConsultSalesPageComponent implements OnInit {
     this.ref.onClose.subscribe((sale) => {
       this.getSales();
 
-      console.log(sale);
       if (sale !== undefined) {
         if (sale.id > 0) {
           this.mess.add({
@@ -88,7 +82,8 @@ export class ConsultSalesPageComponent implements OnInit {
       montocuota: sale.montocuota,
       noProducto: sale.noProducto,
       noSeguro: sale.noSeguro,
-      estado: sale.estado
+      estado: sale.estado,
+      user_id: sale.userId
     };
 
     this.ref = this.dialogService.open(InsuranceSaleComponent, {
@@ -99,7 +94,6 @@ export class ConsultSalesPageComponent implements OnInit {
     this.ref.onClose.subscribe((sales) => {
       this.getSales();
 
-      console.log(sales);
       if (sales !== undefined) {
         if (sales.id > 0) {
           this.mess.add({
@@ -126,18 +120,16 @@ export class ConsultSalesPageComponent implements OnInit {
       montocuota: sale.montocuota,
       noProducto: sale.noProducto,
       noSeguro: sale.noSeguro,
-      estado: sale.estado
+      estado: sale.estado,
+      user_id: sale.userId
     };
 
-    this.saleService
-      .editSales(saleInfo.id, saleInfo)
-      .subscribe((res) => {
-        if (res === null) {
-          this.getSales();
-        }
-      });
+    this.saleService.editSales(saleInfo.id, saleInfo).subscribe((res) => {
+      if (res === null) {
+        this.getSales();
+      }
+    });
   }
-
 
   ngOnDestroy() {
     if (this.ref) {

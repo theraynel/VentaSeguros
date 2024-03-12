@@ -11,5 +11,6 @@ export interface Billing
    montoFactura: number,
    fechaFactura: Date,
    estado: boolean,
+   user_id: number,
    detalle: BillingDetail[]
 }

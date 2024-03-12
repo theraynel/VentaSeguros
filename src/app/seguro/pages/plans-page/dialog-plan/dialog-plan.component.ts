@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
- import { MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 import { Plans } from 'src/app/seguro/interfaces/plans';
 
 import { PlansService } from 'src/app/seguro/services/plans.service';
+import { segurosCommon } from 'src/app/shared/common/common';
 
 @Component({
   selector: 'app-dialog-plan',
   templateUrl: './dialog-plan.component.html',
-  providers: [ MessageService],
+  providers: [MessageService],
   styles: [],
 })
 export class DialogPlanComponent {
@@ -20,12 +21,15 @@ export class DialogPlanComponent {
   public edad: number = 0;
   public id: number = 0;
   public estado: boolean = false;
+  public user_id: number = 0;
+
+  public common = new segurosCommon();
 
   planForm = this.fb.group({
     codePlan: ['', Validators.required],
     namePlan: ['', Validators.required],
     cuotaPlan: ['', Validators.required],
-    edadPlan: [null, Validators.min(1)]
+    edadPlan: [null, Validators.min(1)],
   });
 
   constructor(
@@ -41,16 +45,24 @@ export class DialogPlanComponent {
     this.edad = this.config.data.edadMaxima;
     this.id = this.config.data.id;
     this.estado = this.config.data.estado;
+    this.user_id = this.config.data.user_id;
   }
 
   addPlan() {
-
-    const plan: Plans = {id: 0, codigo: this.code, nombre: this.name, cuota: this.cuota, edadMaxima: this.edad, estado: true};
+    const plan: Plans = {
+      id: 0,
+      codigo: this.code,
+      nombre: this.name,
+      cuota: this.cuota,
+      edadMaxima: this.edad,
+      estado: true,
+      user_id: this.common.getUserId(),
+    };
 
     this.planServices.addPlan(plan).subscribe((res) => {
       if (res.id > 0) {
         this.ref.close(res);
-      }else{
+      } else {
         this.mess.add({
           severity: 'error',
           summary: 'Plan Creado',
@@ -68,12 +80,13 @@ export class DialogPlanComponent {
         cuota: this.cuota,
         edadMaxima: this.edad,
         estado: this.estado,
+        user_id: this.user_id
       };
 
       this.planServices.editPlan(this.id, plan).subscribe((res) => {
         if (res === null) {
           this.ref.close(plan);
-        }else{
+        } else {
           this.mess.add({
             severity: 'error',
             summary: 'Plan Editado',
@@ -90,7 +103,7 @@ export class DialogPlanComponent {
     }
   }
 
-  close(){
+  close() {
     this.ref.close();
   }
 }

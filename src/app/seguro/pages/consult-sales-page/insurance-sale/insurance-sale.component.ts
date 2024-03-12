@@ -30,6 +30,7 @@ export class InsuranceSaleComponent implements OnInit {
   public noSeguro: string = '';
   public montocuota: number = 0;
   public estado: boolean = true;
+  public user_id: number = 0 ;
 
   public common = new segurosCommon();
 
@@ -69,9 +70,7 @@ export class InsuranceSaleComponent implements OnInit {
     this.fechaVenta = new Date(this.config.data.fechaVenta);
     this.montocuota = this.config.data.montocuota;
     this.estado = this.config.data.estado;
-
-    console.log('idcliente', this.clienteId);
-    console.log('id', this.id);
+    this.user_id = this.config.data.user_id;
   }
 
   ngOnInit() {
@@ -118,6 +117,7 @@ export class InsuranceSaleComponent implements OnInit {
         email: t.email,
         fechaNacimiento: t.fechaNacimiento,
         nombreCompleto: `${t.nombre} ${t.apellido}`,
+        user_id: t.user_id
       };
     });
   }
@@ -138,6 +138,7 @@ export class InsuranceSaleComponent implements OnInit {
         noProducto: this.noProducto,
         noSeguro: this.noSeguro,
         estado: this.estado,
+        user_id: this.user_id
       };
 
       console.log('Sales', sale);
@@ -167,8 +168,6 @@ export class InsuranceSaleComponent implements OnInit {
   //#endregion
 
   addSales() {
-    console.log('Monto Cuota', this.montocuota);
-
     const sale: InsuranceSale = {
       id: 0,
       idCliente: this.clienteId,
@@ -180,6 +179,7 @@ export class InsuranceSaleComponent implements OnInit {
       noProducto: this.noProducto,
       noSeguro: this.noSeguro,
       estado: this.estado,
+      user_id: this.common.getUserId()
     };
 
     this.salesServices.addSales(sale).subscribe((res) => {

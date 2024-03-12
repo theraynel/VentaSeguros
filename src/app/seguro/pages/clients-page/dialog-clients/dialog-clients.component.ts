@@ -21,6 +21,7 @@ export class DialogClientsComponent implements OnInit {
   public id: number = 0;
   public sexo: string = '';
   public fechaNacimiento: Date;
+  public user_id: number = 0;
 
   public common = new segurosCommon();
 
@@ -49,6 +50,7 @@ export class DialogClientsComponent implements OnInit {
     this.sexo = this.config.data.sexo;
     this.id = this.config.data.id;
     this.fechaNacimiento = new Date(this.config.data.fechaNacimiento);
+    this.user_id = this.config.data.user_id;
   }
 
   ngOnInit() {
@@ -65,6 +67,7 @@ export class DialogClientsComponent implements OnInit {
       email: this.email,
       fechaNacimiento: new Date(this.fechaNacimiento),
       sexo: this.sexo,
+      user_id: this.common.getUserId()
     };
 console.log("lo que se envia ",client);
 
@@ -99,6 +102,7 @@ console.log("lo que se envia ",client);
         email: this.email,
         fechaNacimiento: new Date(this.fechaNacimiento),
         sexo: this.sexo,
+        user_id: this.user_id
       };
 
       this.clientServices.editClient(this.id, client).subscribe((res) => {

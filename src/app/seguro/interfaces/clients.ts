@@ -7,5 +7,6 @@ export interface Clients
     email: string,
     fechaNacimiento: Date,
     sexo?: string,
-    nombreCompleto?: string
+    nombreCompleto?: string,
+    user_id: number,
 }

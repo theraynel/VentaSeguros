@@ -9,5 +9,6 @@ export interface InsuranceSale
     idTiposeguro: number,
     idPlan: number,
     idTipoCuenta: number,
-    estado: boolean
+    estado: boolean,
+    user_id: number
 }

@@ -25,7 +25,7 @@ export class BillingComponent {
     public dialogService: DialogService,
     private mess: MessageService,
     private confirmDialogService: ConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getBillings();
@@ -33,22 +33,21 @@ export class BillingComponent {
 
   getBillings() {
     this.billingService.getBillings().subscribe((res: any) => {
-
       this.billinglts = res;
 
-      this.billinglts = this.billinglts.filter((x) => x.estado === true);
+      console.log(res);
 
+
+      this.billinglts = this.billinglts.filter((x) => x.estado === true);
     });
   }
 
   updateStatus(sale: Billing) {
-
     this.confirmDialogService.confirm({
       message: 'Seguro que deseas cancelar esta Factura?',
       header: 'Cancelation Confirmation',
       icon: 'pi pi-trash',
       accept: () => {
-
         if (sale.estado == true) sale.estado = false;
         else sale.estado = true;
 
@@ -61,11 +60,11 @@ export class BillingComponent {
           fechaFactura: sale.fechaFactura,
           montoFactura: sale.montoFactura,
           estado: sale.estado,
-          detalle: []
+          user_id: sale.user_id,
+          detalle: [],
         };
 
-        console.log("SaleInfo", saleInfo);
-
+        console.log('SaleInfo', saleInfo);
 
         this.billingService
           .editBilling(saleInfo.id, saleInfo)
@@ -80,7 +79,7 @@ export class BillingComponent {
             }
           });
       },
-      reject: () => { },
+      reject: () => {},
     });
   }
 

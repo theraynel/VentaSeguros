@@ -24,6 +24,7 @@ export class AccountTypesPageComponent implements OnInit {
     codigo: '',
     estado: false,
     nombre: '',
+    user_id: 0
   };
 
   public common = new segurosCommon();

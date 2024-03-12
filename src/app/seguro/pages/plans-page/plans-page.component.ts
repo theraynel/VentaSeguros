@@ -16,10 +16,10 @@ import { segurosCommon } from 'src/app/shared/common/common';
 export class PlansPageComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
 
-  public planslts: Plans[] = [];
-  public plans2: Plans = { id: 0, codigo: '', nombre: '', edadMaxima: 0, cuota: 0, estado: false };
-
   public common = new segurosCommon;
+
+  public planslts: Plans[] = [];
+  public plans2: Plans = { id: 0, codigo: '', nombre: '', edadMaxima: 0, cuota: 0, estado: false, user_id : this.common.getUserId() };
 
   constructor(
     private planServices: PlansService,

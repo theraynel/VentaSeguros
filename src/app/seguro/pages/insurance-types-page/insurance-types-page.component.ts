@@ -23,6 +23,7 @@ export class InsuranceTypesPageComponent implements OnInit {
     codigo: '',
     nombre: '',
     estado: false,
+    user_id: 0
   };
 
  public common = new segurosCommon;
