@@ -99,6 +99,7 @@ export class BillingComponent {
     this.ref.onClose.subscribe((client) => {
       this.getBillings();
 
+
       console.log(client);
       if (client !== undefined) {
         if (client.id > 0) {
