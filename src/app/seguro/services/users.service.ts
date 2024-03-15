@@ -22,7 +22,7 @@ const httpOption = {
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(user: Users): Observable<RegisterDTO> {
     const url: string = `${environment.apiUrl}${'/Users/registro'}`;
@@ -38,6 +38,16 @@ export class UsersService {
   login(login: LoginUsers): Observable<LoginUsersDTO> {
     const url: string = `${environment.apiUrl}${'/Users/login'}`;
     return this.http.post<LoginUsers>(url, login, httpOption).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return of(error.error);
+      })
+    );
+  }
+
+  forgotPassword(email: string): Observable<string> {
+    const url: string = `${environment.apiUrl}${'/Users/ForgotPassword'}`;
+    return this.http.post<string>(`${url}${"?email="}${email} `, httpOption).pipe(
+      map((res) => res),
       catchError((error: HttpErrorResponse) => {
         return of(error.error);
       })
