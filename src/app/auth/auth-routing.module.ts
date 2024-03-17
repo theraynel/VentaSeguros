@@ -4,8 +4,6 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AuthLoginGuard } from "./guardLogin";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
-import { ChangePasswordComponent } from "./change-password/change-password.component";
-import { AuthGuard } from "./guard";
 
 @NgModule({
   imports: [
@@ -13,7 +11,7 @@ import { AuthGuard } from "./guard";
       { path: '', component: LoginComponent, canActivate: [AuthLoginGuard] },
       { path: 'register', component: RegisterComponent, canActivate: [AuthLoginGuard] },
       { path: 'forgot', component: ForgotPasswordComponent, canActivate: [AuthLoginGuard] },
-      { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuard]}
+      // { path: 'change', component: ChangePasswordComponent, canActivate: [AuthGuard]}
     ]),
   ],
   exports: [RouterModule],

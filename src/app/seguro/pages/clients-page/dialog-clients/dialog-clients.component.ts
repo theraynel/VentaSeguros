@@ -69,8 +69,6 @@ export class DialogClientsComponent implements OnInit {
       sexo: this.sexo,
       user_id: this.common.getUserId()
     };
-console.log("lo que se envia ",client);
-
 
     this.clientServices.addClient(client).subscribe((res) => {
       const valor: any = res;
@@ -78,10 +76,6 @@ console.log("lo que se envia ",client);
       if (res.id > 0) {
         this.ref.close(res);
       } else {
-        console.log('Entro 1');
-
-        console.log('Entro 1',{ res, valor});
-
         this.mess.add({
           severity: 'error',
           summary: 'Cliente Creado',

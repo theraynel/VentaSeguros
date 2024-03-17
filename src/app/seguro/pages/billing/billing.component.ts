@@ -35,9 +35,6 @@ export class BillingComponent {
     this.billingService.getBillings().subscribe((res: any) => {
       this.billinglts = res;
 
-      console.log(res);
-
-
       this.billinglts = this.billinglts.filter((x) => x.estado === true);
     });
   }
@@ -63,8 +60,6 @@ export class BillingComponent {
           user_id: sale.user_id,
           detalle: [],
         };
-
-        console.log('SaleInfo', saleInfo);
 
         this.billingService
           .editBilling(saleInfo.id, saleInfo)
@@ -99,8 +94,6 @@ export class BillingComponent {
     this.ref.onClose.subscribe((client) => {
       this.getBillings();
 
-
-      console.log(client);
       if (client !== undefined) {
         if (client.id > 0) {
           this.mess.add({
