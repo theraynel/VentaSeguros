@@ -34,47 +34,35 @@ export class ChangePasswordComponent {
       vencimiennto: this.userInfo.vencimiennto,
     };
 
-    console.log(data);
+    const fecha = moment() ;
 
-    const fecha: Date = new Date();
-    const fecha2: string = new Date().toLocaleString();
-    const fecha3 = moment() ;
-
-    console.log("fecha", fecha);
-    console.log("fecha2", fecha2);
-    console.log("fecha3", fecha3);
-    console.log("this.userInfo.vencimiennto", this.userInfo.vencimiennto);
-    console.log(fecha3.diff(this.userInfo.vencimiennto, 'second'));
-
-
-
-    if (fecha && this.userInfo?.vencimiennto && fecha > this.userInfo.vencimiennto) {
+    if (fecha.isAfter(this.userInfo.vencimiennto, 'second')) {
       this.mess.add({
         severity: 'error',
         summary: 'Error',
         detail: 'La fecha y hora han expirado.',
       });
     }else{
-      // if (this.passWord !== this.confirmPassWord) {
-      //   this.mess.add({
-      //     severity: 'error',
-      //     summary: 'Error',
-      //     detail: 'Las password no son iguales',
-      //   });
-      // } else {
-      //   this.user.changerPassword(data).subscribe((res) => {
-      //     const dataRes: any = res;
-      //     if (res.id > 0) {
-      //       this.ref.close(res);
-      //     } else {
-      //       this.mess.add({
-      //         severity: 'error',
-      //         summary: 'Error',
-      //         detail: dataRes,
-      //       });
-      //     }
-      //   });
-      // }
+      if (this.passWord !== this.confirmPassWord) {
+        this.mess.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Las password no son iguales',
+        });
+      } else {
+        this.user.changerPassword(data).subscribe((res) => {
+          const dataRes: any = res;
+          if (res.id > 0) {
+            this.ref.close(res);
+          } else {
+            this.mess.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: dataRes,
+            });
+          }
+        });
+      }
     }
   }
 }

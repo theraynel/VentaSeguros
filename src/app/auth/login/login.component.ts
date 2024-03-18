@@ -72,7 +72,7 @@ export class LoginComponent {
                 }
               }
             });
-          }, 1000);
+          }, 3000);
         } else {
           sessionStorage.setItem(
             'currentUser',
